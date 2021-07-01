@@ -1,14 +1,28 @@
-const initialState: object[] = [];
+import { Channel } from './interface';
 
-const dummyReducer = (state = initialState, action: any) => {
+const initialState: Channel[] = [
+  {
+    id: '1',
+    name: 'vascular'
+  },
+  {
+    id: '2',
+    name: 'cardiology'
+  },
+  {
+    id: '3',
+    name: 'hemotology'
+  },
+];
+
+export const channelsReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case 'channels/ADD':
-      return 
+      return state.concat(action.payload);
     case 'channels/REMOVE':
-      return 
+      const removeChannelIds = action.payload.map((channel: Channel) => channel.id);
+      return state.filter((channel) => !removeChannelIds.includes(channel.id));
     default:
-      return state
+      return state;
   }
-}
-
-export default dummyReducer;
+};
