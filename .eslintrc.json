@@ -6,7 +6,7 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb",
+        "airbnb-typescript",
         "next",
         "next/core-web-vitals"
     ],
@@ -26,9 +26,15 @@
         "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"]}],
         "react/jsx-props-no-spreading": 0,
         "linebreak-style": "off",
-        "no-use-before-define": "off"
-    },
-    "import/extensions": {
-        "extension": "never"
-    } 
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "js": "never",
+              "jsx": "never",
+              "ts": "never",
+              "tsx": "never"
+            }
+         ]
+    }
 }

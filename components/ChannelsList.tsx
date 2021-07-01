@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
 import ChannelItem from './ChannelItem';
+import { Channel } from '../interface';
 
 interface Props {
-  channels: [{
-    id: string,
-    name: string,
-  }],
+  channels: Channel[],
 }
 
 const ChannelsList: FC<Props> = ({ channels }) => (
@@ -13,7 +11,7 @@ const ChannelsList: FC<Props> = ({ channels }) => (
     <div>
       { channels && channels.map( channel => {
         return (
-          <ChannelItem 
+          <ChannelItem
           key = {channel.id}
           channel = {channel}/>
         )
