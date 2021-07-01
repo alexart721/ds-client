@@ -1,16 +1,14 @@
 import { FC } from 'react';
+import { Channel } from '../interface';
 
 interface Props {
-  channel: {
-    id: string,
-    name: string,
-  },
+  channel: Channel,
 }
 
 const ChannelItem: FC<Props> = ({ channel }) => (
   <>
     <div>
-      <label htmlFor="channel">{ channel.name }</label>
+      <label htmlFor="channel"># { channel.name }</label>
     </div>
   </>
 );
