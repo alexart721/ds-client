@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Channel } from '../interface';
+import { ChannelState } from '../lib/redux/reducers';
 
 interface Props {
-  channel: Channel,
+  channel: ChannelState,
 }
 
 const ChannelItem: FC<Props> = ({ channel }) => (
