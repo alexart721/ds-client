@@ -4,15 +4,18 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState: IssueState[] = [
   {
     id: '1',
-    title: 'Bleeding fingernails'
+    title: 'Bleeding fingernails',
+    expanded: false
   },
   {
     id: '2',
-    title: 'Varicose veins'
+    title: 'Varicose veins',
+    expanded: false
   },
   {
     id: '3',
-    title: 'Arrhythmia'
+    title: 'Arrhythmia',
+    expanded: false
   }
 ];
 
