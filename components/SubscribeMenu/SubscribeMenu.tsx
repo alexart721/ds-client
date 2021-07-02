@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { Channel } from '../../interface';
+import { ChannelState } from '../../lib/redux/reducers';
 import SubscribeItem from '../SubscribeItem/SubscribeItem';
 interface Props {
-  channels: Channel[],
+  channels: ChannelState[],
 }
 
 const SubscribeMenu: FC<Props> = ({ channels }) => {
@@ -15,7 +15,7 @@ const SubscribeMenu: FC<Props> = ({ channels }) => {
                     key = {channel.id}
                     channel = {channel}/>
                 )
-              })}   
+              })}
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { Checkbox } from 'antd'; 
-import { Channel } from '../../interface';
+import { Checkbox } from 'antd';
+import { ChannelState } from '../../lib/redux/reducers';
 
 interface Props {
-  channel: Channel,
+  channel: ChannelState,
 }
 const SubscribeItem: FC<Props> = ({ channel }) => (
   <>
