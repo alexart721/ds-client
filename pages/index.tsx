@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import ChannelsBar from '../components/ChannelsBar/ChannelsBar';
 import NavBar from '../components/NavBar/NavBar';
 import SubscribeMenu from '../components/SubscribeMenu/SubscribeMenu';
-import { Channel } from '../interface';
+import { ChannelState } from '../lib/redux/reducers';
 
 const Home = () => {
-  const channels = useSelector((state: Channel[]) => state);
+  const channels = useSelector((state: ChannelState[]) => state);
   return (
     <div style={{display:"flex", flexDirection:"row"}}>
       <ChannelsBar />

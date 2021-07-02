@@ -1,13 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { channelsReducer } from './reducers';
+import { issuesSlice, channelsSlice } from '../reducers';
 
-const store = configureStore({
-  reducer: channelsReducer,
+export const store = configureStore({
+  reducer: {
+    channels: channelsSlice.reducer,
+    issues: issuesSlice.reducer
+  }
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
-
-export default store;

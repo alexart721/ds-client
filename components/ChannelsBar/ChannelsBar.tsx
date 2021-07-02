@@ -1,9 +1,9 @@
 import ChannelsList from '../ChannelsList';
 import { useSelector } from 'react-redux';
-import { Channel } from '../../interface';
+import { ChannelState } from '../../lib/redux/reducers';
 
 const ChannelsBar = () => {
-  const channels = useSelector((state: Channel[]) => state);
+  const channels = useSelector((state: ChannelState[]) => state);
 
   return (
     <div>

@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { Menu } from 'antd'; 
 import ChannelItem from './ChannelItem';
-import { Channel } from '../interface';
+import { ChannelState } from '../lib/redux/reducers';
 
 interface Props {
-  channels: Channel[],
+  channels: ChannelState[],
 }
 
 const { SubMenu } = Menu;
