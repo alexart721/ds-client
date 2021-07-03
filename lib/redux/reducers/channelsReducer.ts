@@ -1,37 +1,38 @@
 import { ChannelState } from './stateTypes';
+import { User } from '../../../types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { addChannelsToUserApi, removeChannelFromUserApi } from '../../../services';
 
 const initialState: ChannelState[] = [
   {
     id: '1',
-    name: 'vascular',
-    selected: false
+    name: 'vascular'
   },
   {
     id: '2',
-    name: 'cardiology',
-    selected: false
+    name: 'cardiology'
   },
   {
     id: '3',
-    name: 'hemotology',
-    selected: false
+    name: 'hemotology'
   },
 ];
 
-const addChannelsToUser = createAsyncThunk(
+const addChannelsToUser = createAsyncThunk<ChannelState[], ChannelState[]>(
   'channels/addToUser',
-  async (channelIds: ChannelState[], thunkAPI) => {
-    // wait for and return response of new user object
+  async (channels: ChannelState[]) => {
+    const channelsAdded: User = await addChannelsToUserApi(channels).then(res => res.json());
+    return channelsAdded.channels;
   }
 );
 
-const removeChannelsFromUser = createAsyncThunk(
+const removeChannelFromUser = createAsyncThunk<ChannelState[], ChannelState>(
   'channels/removeFromUser',
-  async (channelIds: ChannelState[], thunkAPI) => {
-    // wait for and return reponse of new user object
+  async (channel: ChannelState) => {
+    const channelsRemoved: User = await removeChannelFromUserApi(channel).then(res => res.json());
+    return channelsRemoved.channels;
   }
-)
+);
 
 export const channelsSlice = createSlice({
   name: 'channels',
@@ -45,9 +46,14 @@ export const channelsSlice = createSlice({
       state.filter(channel => !removeChannelIds.includes(channel.id));
     }
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(addChannelsToUser.fulfilled, (state, action) => {
-  //     state.concat(action.payload);
-  //   })
-  // }
+  extraReducers: (builder) => {
+    builder
+    .addCase(addChannelsToUser.fulfilled, (state, action) => {
+      state.concat(action.payload);
+    })
+    .addCase(removeChannelFromUser.fulfilled, (state, action) => {
+      const removeChannelIds = action.payload.map((channel: ChannelState) => channel.id);
+      state.filter(channel => !removeChannelIds.includes(channel.id));
+    })
+  }
 });

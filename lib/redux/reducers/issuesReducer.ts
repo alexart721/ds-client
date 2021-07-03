@@ -1,23 +1,34 @@
 import { IssueState } from './stateTypes';
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState: IssueState[] = [
   {
     id: '1',
     title: 'Bleeding fingernails',
-    expanded: false
   },
   {
     id: '2',
     title: 'Varicose veins',
-    expanded: false
   },
   {
     id: '3',
     title: 'Arrhythmia',
-    expanded: false
   }
 ];
+
+const addIssueToChannel = createAsyncThunk(
+  'issues/addToChannel',
+  async (issue, (channelId: string)) => {
+
+  }
+);
+
+const closeIssue = createAsyncThunk(
+  'issues/close',
+  async (issue) => {
+
+  }
+);
 
 export const issuesSlice = createSlice({
   name: 'issues',
