@@ -2,17 +2,17 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import { Menu } from 'antd'; 
 import ChannelItem from '../ChannelItem/ChannelItem';
-import { ChannelState } from '../../lib/redux/reducers';
+import { MyChannelState } from '../../lib/redux/reducers';
 
 interface Props {
-  channels: ChannelState[],
+  channels: MyChannelState[],
 }
 
 const { SubMenu } = Menu;
 
 const ChannelsList: FC<Props> = ({ channels }) => {
   return (
-    <div style={{ width: "14vw", height: "100vh", background: "#001529" } }>
+    <div style={{ width: "14vw", height: "100%", background: "#001529" } }>
       <Menu
         defaultOpenKeys={['sub1','sub2']}
         mode="inline"
