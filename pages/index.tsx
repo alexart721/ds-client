@@ -31,11 +31,13 @@ const Home: React.FC<{ user: User}> = ({user}) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const accessToken = context.req.headers.authorization;
+  const accessToken = context.req.headers.authorization?.split(' ')[1];
+
+  // const { accessToken } = context.query;
   const roles = 'User';
   let user: User;
 
-  function isString(accessToken: string | undefined): accessToken is string {
+  function isString(accessToken: string | string[] | undefined): accessToken is string {
     return (accessToken as string).trim !== undefined;
   }
 
