@@ -1,8 +1,8 @@
 import { BASE_URL } from '.';
-import { ChannelState } from '../lib/redux/reducers';
+import { MyChannelState } from '../lib/redux/reducers';
 
 
-export const addChannelsToUserApi = (newChannels: ChannelState[]): Promise<Response> => {
+export const addChannelsToUserApi = (newChannels: MyChannelState[]): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
   return fetch(BASE_URL + '/users/channels/add', {
     method: 'POST',
@@ -14,7 +14,7 @@ export const addChannelsToUserApi = (newChannels: ChannelState[]): Promise<Respo
   });
 };
 
-export const removeChannelFromUserApi = (removeChannel: ChannelState): Promise<Response> => {
+export const removeChannelFromUserApi = (removeChannel: MyChannelState): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
   return fetch(BASE_URL + '/users/channels/:id', {
     method: 'DELETE',

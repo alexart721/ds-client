@@ -1,6 +1,6 @@
 import { MyIssueState } from './stateTypes';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addIssueToChannelApi, addIssueToUserApi } from '../../../services';
+import * as issuesApi from '../../../services/issuesApi';
 import { Issue, IssueWithChannelId, User } from '../../../types';
 import _ from 'lodash';
 
@@ -24,18 +24,21 @@ const addIssueToChannel = createAsyncThunk<MyIssueState[], IssueWithChannelId>(
   async (issueWithChannel: IssueWithChannelId) => {
     const { channelId } = issueWithChannel;
     const issue = _.omit(issueWithChannel, ['channelId']);
-    const newIssue: Issue = await addIssueToChannelApi(issue, channelId).then(res => res.json());
-    const userWithIssue: User = await addIssueToUserApi(newIssue).then(res => res.json());
+    const newIssue: Issue = await issuesApi.addIssueToChannelApi(issue, channelId).then(res => res.json());
+    const userWithIssue: User = await issuesApi.addIssueToUserApi(newIssue).then(res => res.json());
     return userWithIssue.issueMeta;
   }
 );
 
 const closeIssue = createAsyncThunk(
   'issues/close',
-  async (issue) => {
-    // Set issue status to 'Closed'
-    // Remove from MyIssues on user
-    // Update MyIssue state
+  async (closingIssueWithChannel: IssueWithChannelId) => {
+    const { channelId } = closingIssueWithChannel;
+    const closingIssue = _.omit(closingIssueWithChannel, ['channelId']);
+    await issuesApi.closeIssueApi(closingIssue).then(res => res.json());
+    await issuesApi.archiveIssueApi(closingIssue, channelId).then(res => res.json());
+    const userWithoutIssue: User = await issuesApi.updateUserIssueMetaApi(closingIssue).then(res => res.json());
+    return userWithoutIssue.issueMeta;
     // Add to archive state, when written
   }
 );
@@ -55,6 +58,10 @@ export const myIssuesSlice = createSlice({
     builder
     .addCase(addIssueToChannel.fulfilled, (state, action) => {
       state.concat(action.payload);
+    })
+    .addCase(closeIssue.fulfilled, (state, action) => {
+      const removeIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
+      state.filter(issue => !removeIssueIds.includes(issue.id));
     })
   }
 })
