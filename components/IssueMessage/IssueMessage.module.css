@@ -1,0 +1,58 @@
+.outerDiv {
+  display: flex; 
+  flex-direction: column; 
+  margin: 1.3rem 1.5rem;
+  padding: 0.4rem 0.8rem;
+  max-height: 300px;
+  overflow-y: scroll;
+  border-radius: 8px; 
+  background-color: #65b7f3;
+  box-shadow: 2px 3px 4px #111d2c;
+}
+
+.outerDiv::-webkit-scrollbar {
+  display: none;
+}
+
+.outerDiv1 {
+  display: flex; 
+  flex-direction: column; 
+  margin: 1.3rem 1.5rem 0.5rem;
+  padding: 0.4rem 0.8rem;
+  height: 450px;
+  max-height: 450px;
+  overflow-y: scroll;
+  border-radius: 8px; 
+  background-color: #65b7f3;
+  box-shadow: 2px 3px 4px #111d2c;
+}
+
+.outerDiv1::-webkit-scrollbar {
+  display: none;
+}
+
+
+.antBtn {
+  padding: 0;
+}
+
+.details1 {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.details2 {
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+.messageBar {
+  width: 700px;
+  padding: 10px;
+}
+
+.messageBarDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
