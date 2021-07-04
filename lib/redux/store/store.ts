@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { issuesSlice, channelsSlice } from '../reducers';
+import { myIssuesSlice, myChannelsSlice } from '../reducers';
 
 export const store = configureStore({
   reducer: {
-    channels: channelsSlice.reducer,
-    issues: issuesSlice.reducer
+    channels: myChannelsSlice.reducer,
+    issues: myIssuesSlice.reducer
   }
 });
 

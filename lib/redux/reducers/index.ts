@@ -1,3 +1,3 @@
 export * from './stateTypes';
-export * from './channelsReducer';
-export * from './issuesReducer';
+export * from './myChannelsReducer';
+export * from './myIssuesReducer';

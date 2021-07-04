@@ -1,11 +1,9 @@
-export interface ChannelState {
+export interface MyChannelState {
   id: string;
   name: string;
-  selected: boolean;
 }
 
-export interface IssueState {
+export interface MyIssueState {
   id: string;
   title: string;
-  expanded: boolean;
 }
