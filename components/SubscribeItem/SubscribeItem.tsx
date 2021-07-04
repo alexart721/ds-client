@@ -8,7 +8,7 @@ interface Props {
 const SubscribeItem: FC<Props> = ({ channel }) => (
   <>
     <div>
-    <Checkbox>{channel.name}</Checkbox>
+      <Checkbox><div style={{fontSize:"large"}}>#{channel.name}</div></Checkbox>
     </div>
   </>
 );

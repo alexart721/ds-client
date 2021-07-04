@@ -1,4 +1,4 @@
-import ChannelsList from '../ChannelsList';
+import ChannelsList from '../ChannelList/ChannelsList';
 import { useSelector } from '../../lib/hooks/useTypedSelector';
 
 const ChannelsBar = () => {
