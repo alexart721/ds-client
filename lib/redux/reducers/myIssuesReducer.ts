@@ -4,20 +4,22 @@ import * as issuesApi from '../../../services/issuesApi';
 import { Issue, IssueWithChannelId, User } from '../../../types';
 import _ from 'lodash';
 
-const initialState: MyIssueState[] = [
-  {
-    id: '1',
-    title: 'Bleeding fingernails',
-  },
-  {
-    id: '2',
-    title: 'Varicose veins',
-  },
-  {
-    id: '3',
-    title: 'Arrhythmia',
-  }
-];
+// const initialState: MyIssueState[] = [
+//   {
+//     id: '1',
+//     title: 'Bleeding fingernails',
+//   },
+//   {
+//     id: '2',
+//     title: 'Varicose veins',
+//   },
+//   {
+//     id: '3',
+//     title: 'Arrhythmia',
+//   }
+// ];
+
+const initialState: MyIssueState[] = [];
 
 const addIssueToChannel = createAsyncThunk<MyIssueState[], IssueWithChannelId>(
   'issues/addToChannel',

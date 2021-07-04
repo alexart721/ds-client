@@ -3,20 +3,21 @@ import { User } from '../../../types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { addChannelsToUserApi, removeChannelFromUserApi } from '../../../services';
 
-const initialState: MyChannelState[] = [
-  {
-    id: '1',
-    name: 'vascular'
-  },
-  {
-    id: '2',
-    name: 'cardiology'
-  },
-  {
-    id: '3',
-    name: 'hemotology'
-  },
-];
+// const initialState: MyChannelState[] = [
+//   {
+//     id: '1',
+//     name: 'vascular'
+//   },
+//   {
+//     id: '2',
+//     name: 'cardiology'
+//   },
+//   {
+//     id: '3',
+//     name: 'hemotology'
+//   },
+// ];
+const initialState: MyChannelState[]=[]
 
 // For admin: add channel
 
