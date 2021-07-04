@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import IssueItem from '../IssueItem/IssueItem';
-import { ChannelState, IssueState } from '../../lib/redux/reducers';
+import { MyIssueState } from '../../lib/redux/reducers';
 
 interface Props {
-  issues: IssueState[],
+  issues: MyIssueState[],
   channel: string,
 }
 

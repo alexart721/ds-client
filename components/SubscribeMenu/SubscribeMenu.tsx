@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { ChannelState } from '../../lib/redux/reducers';
+import { MyChannelState } from '../../lib/redux/reducers';
 import SubscribeItem from '../SubscribeItem/SubscribeItem';
 
 interface Props {
-  channels: ChannelState[],
+  channels: MyChannelState[],
 }
 
 const SubscribeMenu: FC<Props> = ({ channels }) => {
