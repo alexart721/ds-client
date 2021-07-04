@@ -11,12 +11,12 @@ const SubscribeMenu: FC<Props> = ({ channels }) => {
   return (
     <div>
       { channels && channels.map( channel => {
-                return (
-                    <SubscribeItem
-                    key = {channel.id}
-                    channel = {channel}/>
-                )
-              })}
+        return (
+            <SubscribeItem
+            key = {channel.id}
+            channel = {channel}/>
+        )
+      })}
     </div>
   );
 };

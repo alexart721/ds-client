@@ -1,0 +1,14 @@
+.sitePageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #001529;
+  width: 86vw;
+  font-size: x-large;
+  color: rgb(255, 255, 255);
+}
+
+.innerDiv {
+  display: flex;
+  align-content: center;
+}

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ChannelState } from '../lib/redux/reducers';
+import { ChannelState } from '../../lib/redux/reducers';
 
 interface Props {
   channel: ChannelState,
