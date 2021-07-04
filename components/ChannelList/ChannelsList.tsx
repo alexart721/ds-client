@@ -12,7 +12,7 @@ const { SubMenu } = Menu;
 
 const ChannelsList: FC<Props> = ({ channels }) => {
   return (
-    <div style={{ width: "14vw", height: "100vh", background: "#001529" } }>
+    <div style={{ width: "14vw", height: "100%", background: "#001529" } }>
       <Menu
         defaultOpenKeys={['sub1','sub2']}
         mode="inline"
