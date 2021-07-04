@@ -1,4 +1,4 @@
-import { ChannelState } from '../lib/redux/reducers';
+import { MyChannelState, MyIssueState } from '../lib/redux/reducers';
 
 export interface User {
   firstName: string;
@@ -9,9 +9,9 @@ export interface User {
   state: string;
   status: string;
   roles: string;
-  channels: ChannelState[];
+  channels: MyChannelState[];
   dmChannels: Object[];
-  issueMeta: Object[];
+  issueMeta: MyIssueState[];
 }
 
 export interface FieldData {
@@ -39,4 +39,8 @@ export interface Issue {
   metaFields: FieldData[];
   tags: string[];
   threadMessages: MessageData[];
+}
+
+export interface IssueWithChannelId extends Issue {
+  channelId: string;
 }
