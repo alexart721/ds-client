@@ -1,11 +1,11 @@
 import { FC, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'antd';
-import { IssueState } from '../../lib/redux/reducers';
+import { MyIssueState } from '../../lib/redux/reducers';
 import styles from './IssueItem.module.css';
 
 interface Props {
-  issue: IssueState,
+  issue: MyIssueState,
   channel: string,
 }
 
@@ -33,7 +33,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
           <p style={{marginBottom:"0"}}>Hi, Here we will add description of the issue.</p>
           <Button type="link" className={styles.antBtn} onClick={clickHandler}><span style={{color:"#001529"}}>See more details...</span></Button>
         </div>
-      </div> : 
+      </div> :
       <div>
         <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
           <h2 style={{width:"fit-content", margin:"0"}}>{ issue.title } - Prority Medium</h2>
