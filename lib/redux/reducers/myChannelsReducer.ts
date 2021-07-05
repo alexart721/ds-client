@@ -2,6 +2,7 @@ import { MyChannelState } from './stateTypes';
 import { User } from '../../../types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { addChannelsToUserApi, removeChannelFromUserApi } from '../../../services';
+import _ from 'lodash';
 
 // const initialState: MyChannelState[] = [
 //   {
@@ -17,11 +18,11 @@ import { addChannelsToUserApi, removeChannelFromUserApi } from '../../../service
 //     name: 'hemotology'
 //   },
 // ];
-const initialState: MyChannelState[]=[]
+const initialState: MyChannelState[] = [];
 
 // For admin: add channel
 
-const addChannelsToUser = createAsyncThunk<MyChannelState[], MyChannelState[]>(
+export const addChannelsToUser = createAsyncThunk<MyChannelState[], MyChannelState[]>(
   'channels/addToUser',
   async (channels: MyChannelState[]) => {
     const channelsAdded: User = await addChannelsToUserApi(channels).then(res => res.json());
@@ -29,7 +30,7 @@ const addChannelsToUser = createAsyncThunk<MyChannelState[], MyChannelState[]>(
   }
 );
 
-const removeChannelFromUser = createAsyncThunk<MyChannelState[], MyChannelState>(
+export const removeChannelFromUser = createAsyncThunk<MyChannelState[], MyChannelState>(
   'channels/removeFromUser',
   async (channel: MyChannelState) => {
     const channelsRemoved: User = await removeChannelFromUserApi(channel).then(res => res.json());
@@ -42,21 +43,25 @@ export const myChannelsSlice = createSlice({
   initialState,
   reducers: {
     addChannel(state, action) {
-      state.concat(action.payload);
+      const stateChannelIds = state.map((channel: MyChannelState) => channel.id);
+      const newChannels = action.payload.filter((channel: MyChannelState) => !stateChannelIds.includes(channel.id));
+      return state.concat(newChannels);
     },
     removeChannel(state, action) {
       const removeChannelIds = action.payload.map((channel: MyChannelState) => channel.id);
-      state.filter(channel => !removeChannelIds.includes(channel.id));
+      return state.filter(channel => !removeChannelIds.includes(channel.id));
     }
   },
   extraReducers: (builder) => {
     builder
     .addCase(addChannelsToUser.fulfilled, (state, action) => {
-      state.concat(action.payload);
+      const stateChannelIds = state.map((channel: MyChannelState) => channel.id);
+      const newChannels = action.payload.filter((channel: MyChannelState) => !stateChannelIds.includes(channel.id));
+      return state.concat(newChannels);
     })
     .addCase(removeChannelFromUser.fulfilled, (state, action) => {
       const removeChannelIds = action.payload.map((channel: MyChannelState) => channel.id);
-      state.filter(channel => !removeChannelIds.includes(channel.id));
+      return state.filter(channel => !removeChannelIds.includes(channel.id));
     })
   }
 });

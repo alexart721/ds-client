@@ -46,6 +46,7 @@ export interface IssueWithChannelId extends Issue {
 }
 
 export interface Channel {
+  _id: string;
   name: string,
   issues: Issue[],
   archivedIssues: Issue[],
