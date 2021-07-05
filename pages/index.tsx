@@ -9,8 +9,8 @@ import { User } from '../types';
 import { store } from '../lib/redux/store';
 import { myChannelsSlice, myIssuesSlice } from '../lib/redux/reducers';
 
-const Home: React.FC<{ user: User}> = ({user}) => {
-
+const Home: React.FC<{ user: User, accessToken: string }> = ({ user, accessToken }) => {
+  localStorage.setItem('accessToken', accessToken);
   store.dispatch(myChannelsSlice.actions.addChannel(user.channels));
   store.dispatch(myIssuesSlice.actions.addIssue(user.issueMeta));
 
@@ -31,13 +31,12 @@ const Home: React.FC<{ user: User}> = ({user}) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const accessToken = context.req.headers.authorization?.split(' ')[1];
+  const { accessToken } = context.query;
 
-  // const { accessToken } = context.query;
   const roles = 'User';
   let user: User;
 
-  function isString(accessToken: string | string[] | undefined): accessToken is string {
+  function isString(accessToken: string | string[]): accessToken is string {
     return (accessToken as string).trim !== undefined;
   }
 
@@ -53,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       user = await getUserApi(accessToken, response.id).then(res => res.json());
 
       return {
-        props: { user },
+        props: { user, accessToken },
       };
     }
   }
