@@ -4,17 +4,18 @@ import SubscribeItem from '../SubscribeItem/SubscribeItem';
 
 interface Props {
   channels: MyChannelState[],
+  onCheck: Function,
 }
 
-const SubscribeMenu: FC<Props> = ({ channels }) => {
-
+const SubscribeMenu: FC<Props> = ({ channels, onCheck }) => {
   return (
     <div>
       { channels && channels.map( channel => {
         return (
             <SubscribeItem
             key = {channel.id}
-            channel = {channel}/>
+            channel = {channel}
+            onCheck={onCheck}/>
         )
       })}
     </div>

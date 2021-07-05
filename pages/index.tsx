@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link'
 import { Button } from 'antd';
 import ChannelsBar from '../components/ChannelsBar/ChannelsBar';
@@ -10,9 +10,14 @@ import { store } from '../lib/redux/store';
 import { myChannelsSlice, myIssuesSlice } from '../lib/redux/reducers';
 
 const Home: React.FC<{ user: User, accessToken: string }> = ({ user, accessToken }) => {
-  localStorage.setItem('accessToken', accessToken);
-  store.dispatch(myChannelsSlice.actions.addChannel(user.channels));
-  store.dispatch(myIssuesSlice.actions.addIssue(user.issueMeta));
+  useEffect(() => {
+    localStorage.setItem('accessToken', accessToken);
+  }, []);
+
+  if (user) {
+    store.dispatch(myChannelsSlice.actions.addChannel(user.channels));
+    store.dispatch(myIssuesSlice.actions.addIssue(user.issueMeta));
+  }
 
   return (
     <div style={{display:"flex", flexDirection:"row"}}>
