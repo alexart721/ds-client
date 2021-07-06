@@ -26,19 +26,19 @@ export interface MessageData {
 }
 
 export interface Issue {
-  _id: string;
+  _id?: string;
   title: string;
   priority: string;
   status: string;
-  issueOwner: string;
+  issueOwner?: string;
   patientAge: number;
   patientGender: string;
   patientMedicalIssues: string;
   patientMedications: string;
-  patientVitals: object;
-  metaFields: FieldData[];
-  tags: string[];
-  threadMessages: MessageData[];
+  patientVitals: Vitals;
+  metaFields?: FieldData[];
+  tags?: string[];
+  threadMessages?: MessageData[];
 }
 
 export interface IssueWithChannelId extends Issue {
@@ -46,8 +46,14 @@ export interface IssueWithChannelId extends Issue {
 }
 
 export interface Channel {
-  _id: string;
+  _id?: string;
   name: string,
   issues: Issue[],
   archivedIssues: Issue[],
+}
+
+export interface Vitals {
+  temperature: string,
+  heartRate: string,
+  bloodPressure: string,
 }
