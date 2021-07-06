@@ -6,4 +6,5 @@ export interface MyChannelState {
 export interface MyIssueState {
   id: string;
   title: string;
+  channelName: string;
 }

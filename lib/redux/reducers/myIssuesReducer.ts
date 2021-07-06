@@ -21,20 +21,19 @@ import _ from 'lodash';
 
 const initialState: MyIssueState[] = [];
 
-export const addIssueToChannel = createAsyncThunk<MyIssueState[], IssueWithChannelId>(
+export const addIssueToChannel = createAsyncThunk<MyIssueState | null, IssueWithChannelId>(
   'issues/addToChannel',
   async (issueWithChannel: IssueWithChannelId) => {
-    console.log('issueWithChannel: ', issueWithChannel);
-
     const { channelId } = issueWithChannel;
     const issue = _.omit(issueWithChannel, ['channelId']);
-    console.log('issue: ', issue);
-
     const newIssue: Issue = await issuesApi.addIssueToChannelApi(issue, channelId).then(res => res.json());
-    const userWithIssue: User = await issuesApi.addIssueToUserApi(newIssue).then(res => res.json());
-    console.log('userWithIssue: ', userWithIssue);
-
-    return userWithIssue.issueMeta;
+    let newIssueState: MyIssueState | null = null;
+    if (newIssue) newIssueState = {
+      id: newIssue._id as string,
+      title: newIssue.title,
+      channelName: newIssue.issueChannelName as string,
+    }
+    return newIssueState;
   }
 );
 
@@ -56,9 +55,9 @@ export const myIssuesSlice = createSlice({
   initialState,
   reducers: {
     addIssue(state, action) {
-      const stateIssueIds = state.map((issue: MyIssueState) => issue.id);
-      const newIssues = action.payload.filter((issue: MyIssueState) => !stateIssueIds.includes(issue.id));
-      return state.concat(newIssues);
+      console.log(action.payload);
+
+      return state.concat(action.payload);
     },
     closeIssue(state, action) {
       const sansRemovedIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
@@ -68,11 +67,7 @@ export const myIssuesSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addCase(addIssueToChannel.fulfilled, (state, action) => {
-      console.log('action.payload: ', action.payload);
-
-      const stateIssueIds = state.map((issue: MyIssueState) => issue.id);
-      const newIssues = action.payload.filter((issue: MyIssueState) => !stateIssueIds.includes(issue.id));
-      return state.concat(newIssues);
+      if (action.payload) return state.concat([action.payload]);
     })
     .addCase(closeIssue.fulfilled, (state, action) => {
       const sansRemovedIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
