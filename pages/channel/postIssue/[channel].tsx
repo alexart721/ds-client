@@ -4,7 +4,7 @@ import { Form, Input, InputNumber, Select, Button, Upload, message } from 'antd'
 import SideBar from '../../../components/SideBar/SideBar';
 import PostIssueNavBar from '../../../components/PostIssueNavBar/PostIssueNavBar';
 import { UploadOutlined } from '@ant-design/icons';
-import { Issue, IssueWithChannelId } from '../../../types';
+import { IssueWithChannelId } from '../../../types';
 import { store } from '../../../lib/redux/store';
 import  { addIssueToChannel } from '../../../lib/redux/reducers';
 
