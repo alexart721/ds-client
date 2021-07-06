@@ -1,0 +1,8 @@
+.issueDiv {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.issueDiv::-webkit-scrollbar {
+  display: none;
+}

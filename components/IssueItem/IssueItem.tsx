@@ -53,7 +53,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
           <p className={styles.details2}>&emsp;&emsp;&emsp;Temp: {issue.patientVitals.temperature}, BP: {issue.patientVitals.bloodPressure}, HR: {issue.patientVitals.heartRate}</p>
           <p className={styles.details1}>Picture:</p>
           &emsp;&emsp;&emsp;<img style={{height:"200px", width:"200px"}} src="https://advancedtissue.com/wp-content/uploads/cut-finger.jpg"/><br/><br/>
-          <Button type="primary" onClick={clickHandler}>Collapse</Button>
+          <Button type="primary" onClick={clickHandler} style={{marginRight:"1rem"}}>Collapse</Button>
           <Link href="/channel/[channel]/[issue]" as={`/channel/${channel}/${issue.title}`}><Button type="primary">Respond</Button></Link>
         </div>
       </div>

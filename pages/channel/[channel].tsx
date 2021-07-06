@@ -7,6 +7,7 @@ import IssuesList from '../../components/IssueList/IssueList';
 import { getChannelIssuesApi } from '../../services';
 import { store } from '../../lib/redux/store';
 import { Issue } from '../../types';
+import styles from '../../styles/ChannelIssues.module.css';
 
 const initialChannelIssues: Issue[] = [];
 
@@ -40,7 +41,7 @@ const ChannelIssues = () => {
         <div>
           {channel && <ChannelNavBar channel={channel}/>}
         </div>
-        <div style={{height:"100%"}}>
+        <div className={styles.issueDiv}>
           {channelIssues && <IssuesList issues={channelIssues} channel={channel}/>}
         </div>
       </div>
