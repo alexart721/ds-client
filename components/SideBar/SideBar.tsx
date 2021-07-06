@@ -21,7 +21,7 @@ const SideBar = () => {
           <ChannelsList channels={channels} />
         </SubMenu>
         <SubMenu key="sub2" title="My Issues" >
-          <MyIssuesList issues={issues} />
+          <MyIssuesList issues={issues} channels={channels}/>
         </SubMenu>
       </Menu>
     </div>

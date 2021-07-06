@@ -2,27 +2,28 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import { Menu } from 'antd';
 import MyIssueItem from '../MyIssueItem/MyIssueItem';
-import { MyIssueState } from '../../lib/redux/reducers';
+import { MyChannelState, MyIssueState } from '../../lib/redux/reducers';
 
 interface Props {
   issues: MyIssueState[],
+  channels: MyChannelState[],
 }
 
 const { SubMenu } = Menu;
 
-const MyIssuesList: FC<Props> = ({ issues }) => {
+const MyIssuesList: FC<Props> = ({ issues, channels }) => {
   return (
     <>
       { issues && issues.map( issue => {
         return (
           <Menu.Item key={issue.id}>
-            {/* <Link href="/channel/[channel]" as={`/channel/$issue.title??`}> */}
+            <Link href="/[channel]/[issue]" as={`/${channels}/${issue.title}`}>
               <a>
                 <MyIssueItem
                   issue = {issue}
                 />
               </a>
-            {/* </Link> */}
+            </Link>
           </Menu.Item>
         )
       })}

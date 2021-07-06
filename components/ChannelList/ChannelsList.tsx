@@ -8,7 +8,6 @@ interface Props {
   channels: MyChannelState[],
 }
 
-const { SubMenu } = Menu;
 
 const ChannelsList: FC<Props> = ({ channels }) => {
   return (
