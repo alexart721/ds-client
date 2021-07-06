@@ -36,7 +36,7 @@ const SideBar = () => {
           {issues && issues.map(issue => {
             return (
               <Menu.Item key={issue.id}>
-                <Link href="/[channel]/[issue]" as={`/${issue.channelName}/${issue.title}`}>
+                <Link href="/channel/[channel]/[issue]" as={`/channel/${issue.channelName}/${issue.title}`}>
                   <a>
                     <MyIssueItem
                       issue={issue}

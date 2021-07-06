@@ -55,9 +55,9 @@ export const myIssuesSlice = createSlice({
   initialState,
   reducers: {
     addIssue(state, action) {
-      const stateIssueIds = state.map((issue: MyIssueState) => issue.id);
-      const newIssues = action.payload.filter((issue: MyIssueState) => !stateIssueIds.includes(issue.id));
-      return state.concat(newIssues);
+      console.log(action.payload);
+
+      return state.concat(action.payload);
     },
     closeIssue(state, action) {
       const sansRemovedIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
