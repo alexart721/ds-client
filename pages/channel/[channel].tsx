@@ -24,7 +24,14 @@ const ChannelIssues = () => {
   useEffect(() => {
     const channelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
     if (channelId) fetchIssues(channelId);
-  }, [router.query.channel]);
+  }, [myIssues, router.query.channel]);
+
+  useEffect(() => {
+    store.subscribe(() => {
+      const channelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
+    if (channelId) fetchIssues(channelId);
+    })
+  }, [])
 
   return (
     <div style={{display:"flex", flexDirection:"row"}}>
