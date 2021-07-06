@@ -32,6 +32,7 @@ export interface Issue {
   status: string;
   issueOwner?: string;
   issueOwnerName?: string;
+  issueChannelName?: string;
   patientAge: number;
   patientGender: string;
   patientMedicalIssues: string;

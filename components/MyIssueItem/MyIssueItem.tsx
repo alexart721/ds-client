@@ -8,7 +8,7 @@ interface Props {
 const MyIssueItem: FC<Props> = ({ issue }) => (
   <>
     <div>
-      <label htmlFor="issue"># { /* this needs issue.title? */ }</label>
+      <label htmlFor="issue"># {issue.title}</label>
     </div>
   </>
 );
