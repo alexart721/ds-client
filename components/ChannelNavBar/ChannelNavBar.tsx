@@ -24,8 +24,8 @@ const ChannelNavBar: FC<Props> = ({channel, issue}) => {
           </div>
           }
           <div style={{display:"flex", alignItems:"center"}}>
-            {channel && issue ? <Link href={`/channel/${channel}`}><Button type="primary">&emsp; Back To Channel &emsp;</Button></Link> :
-            <Link href="/channel/postIssue/[channel]" as={`/channel/postIssue/${channel}`}><Button type="primary">&emsp;&emsp; Post Issue &emsp;&emsp;</Button></Link>}
+            {channel && !issue && <Link href="/channel/postIssue/[channel]" as={`/channel/postIssue/${channel}`}><Button type="primary">&emsp;&emsp; Post Issue &emsp;&emsp;</Button></Link>}
+            {channel && !issue && <Link href="/"><Button type="primary">&emsp; Back To Home &emsp;</Button></Link>}  
           </div>
         </div>
       </Header>
