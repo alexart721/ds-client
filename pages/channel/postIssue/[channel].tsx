@@ -78,7 +78,8 @@ const PostIssue: React.FC = () => {
     const issueData: IssueWithChannelId = {
       ...values, channelId
     };
-    store.dispatch(addIssueToChannel())
+    store.dispatch(addIssueToChannel(issueData));
+    router.push(`/channel/${router.query.channel}`);
   }
 
   return (
