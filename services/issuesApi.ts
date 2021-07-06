@@ -14,21 +14,18 @@ export const getChannelIssuesApi = (channelId: string): Promise<Response> => {
 
 export const addIssueToChannelApi = (newIssue: Issue, channelId: string): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  // return fetch(BASE_URL + `/channels/${channelId}/issues`, {
-  //   mode: 'no-cors',
-  //   method: 'POST',
-  //   headers: {
-  //     'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-  //     'Content-Type': 'multipart/form-data',
-  //     'Authorization': `Bearer: ${token}`
-  //   },
-  //   body: JSON.stringify({ newIssue })
-  // });
   const formData = new FormData();
-  let key: keyof typeof newIssue; 
-  for(key in newIssue) {
-    formData.append(key, JSON.stringify(newIssue[key]))
-  }
+  formData.append('title',newIssue.title);
+  formData.append('patientAge',`${newIssue.patientAge}`);
+  formData.append('priority',newIssue.priority);
+  formData.append('patientGender',newIssue.patientGender);
+  formData.append('patientMedications',newIssue.patientMedications);
+  formData.append('patientMedicalIssues',newIssue.patientMedicalIssues);
+  formData.append('temperature',newIssue.patientVitals.temperature);
+  formData.append('heartRate',newIssue.patientVitals.heartRate);
+  formData.append('bloodPressure',newIssue.patientVitals.bloodPressure);
+  if (newIssue.issueDescription) formData.append('issueDescription',newIssue.issueDescription);
+  if (newIssue.imageUrl) formData.append('image',newIssue.imageUrl);
   return fetch (BASE_URL + `/channels/${channelId}/issues`, {
     method: 'POST',
     mode: 'no-cors',

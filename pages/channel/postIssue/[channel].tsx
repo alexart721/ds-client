@@ -125,12 +125,6 @@ const PostIssue: React.FC = () => {
             <Form.Item name={['patientVitals', 'bloodPressure']} label="Blood Pressure">
               <Input />
             </Form.Item>
-            {/* <Form.Item name={['user', 'blood pressure sbp']} label="Blood Presure (SBP)" rules={[{ type: 'number'}]}>
-              <InputNumber />
-            </Form.Item>
-            <Form.Item name={['user', 'blood pressure dbp']} label="Blood Presure (DBP)" rules={[{ type: 'number'}]}>
-              <InputNumber />
-            </Form.Item> */}
             <Form.Item name='issueDescription' label="Issue Description">
               <Input.TextArea autoSize={{ minRows: 3, maxRows: 3 }}/>
             </Form.Item>
