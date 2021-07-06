@@ -31,14 +31,18 @@ export interface Issue {
   priority: string;
   status: string;
   issueOwner?: string;
+  issueOwnerName?: string;
   patientAge: number;
   patientGender: string;
   patientMedicalIssues: string;
   patientMedications: string;
   patientVitals: Vitals;
+  imageUrl?: string;
+  issueDescription?: string;
   metaFields?: FieldData[];
   tags?: string[];
   threadMessages?: MessageData[];
+  createdAt?: Date;
 }
 
 export interface IssueWithChannelId extends Issue {
@@ -47,13 +51,13 @@ export interface IssueWithChannelId extends Issue {
 
 export interface Channel {
   _id?: string;
-  name: string,
-  issues: Issue[],
-  archivedIssues: Issue[],
+  name: string;
+  issues: Issue[];
+  archivedIssues: Issue[];
 }
 
 export interface Vitals {
-  temperature: string,
-  heartRate: string,
-  bloodPressure: string,
+  temperature: string;
+  heartRate: string;
+  bloodPressure: string;
 }

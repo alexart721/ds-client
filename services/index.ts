@@ -1,5 +1,7 @@
-export const BASE_URL = 'http://localhost/api';
-export const BASE_AUTH_URL = 'http://localhost/auth';
+// export const BASE_URL = 'http://localhost/api';
+// export const BASE_AUTH_URL = 'http://localhost/auth';
+export const BASE_URL = 'http://localhost:4000';
+export const BASE_AUTH_URL = 'http://localhost:4002';
 
 export * from './channelsApi';
 export * from './issuesApi';

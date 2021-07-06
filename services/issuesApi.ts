@@ -1,6 +1,17 @@
 import { BASE_URL } from '.';
 import { Issue } from '../types';
 
+export const getChannelIssuesApi = (channelId: string): Promise<Response> => {
+  let token = localStorage.getItem('accessToken');
+  return fetch(BASE_URL + `/channels/${channelId}/issues`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer: ${token}`
+    },
+  });
+};
+
 export const addIssueToChannelApi = (newIssue: Issue, channelId: string): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
   return fetch(BASE_URL + `/channels/${channelId}/issues`, {
@@ -16,7 +27,7 @@ export const addIssueToChannelApi = (newIssue: Issue, channelId: string): Promis
 export const addIssueToUserApi = (newIssue: Issue): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
   return fetch(BASE_URL + '/users/issues/add', {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer: ${token}`
