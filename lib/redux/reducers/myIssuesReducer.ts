@@ -21,7 +21,7 @@ import _ from 'lodash';
 
 const initialState: MyIssueState[] = [];
 
-const addIssueToChannel = createAsyncThunk<MyIssueState[], IssueWithChannelId>(
+export const addIssueToChannel = createAsyncThunk<MyIssueState[], IssueWithChannelId>(
   'issues/addToChannel',
   async (issueWithChannel: IssueWithChannelId) => {
     const { channelId } = issueWithChannel;
@@ -32,7 +32,7 @@ const addIssueToChannel = createAsyncThunk<MyIssueState[], IssueWithChannelId>(
   }
 );
 
-const closeIssue = createAsyncThunk(
+export const closeIssue = createAsyncThunk(
   'issues/close',
   async (closingIssueWithChannel: IssueWithChannelId) => {
     const { channelId } = closingIssueWithChannel;
@@ -50,20 +50,25 @@ export const myIssuesSlice = createSlice({
   initialState,
   reducers: {
     addIssue(state, action) {
-      state.concat(action.payload);
+      const stateIssueIds = state.map((issue: MyIssueState) => issue.id);
+      const newIssues = action.payload.filter((issue: MyIssueState) => !stateIssueIds.includes(issue.id));
+      return state.concat(newIssues);
     },
     closeIssue(state, action) {
-      state.filter(issue => issue.id !== action.payload.id);
+      const sansRemovedIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
+      state.filter(issue => sansRemovedIssueIds.includes(issue.id));
     }
   },
   extraReducers: (builder) => {
     builder
     .addCase(addIssueToChannel.fulfilled, (state, action) => {
-      state.concat(action.payload);
+      const stateIssueIds = state.map((issue: MyIssueState) => issue.id);
+      const newIssues = action.payload.filter((issue: MyIssueState) => !stateIssueIds.includes(issue.id));
+      return state.concat(newIssues);
     })
     .addCase(closeIssue.fulfilled, (state, action) => {
-      const removeIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
-      state.filter(issue => !removeIssueIds.includes(issue.id));
+      const sansRemovedIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
+      state.filter(issue => sansRemovedIssueIds.includes(issue.id));
     })
   }
 })

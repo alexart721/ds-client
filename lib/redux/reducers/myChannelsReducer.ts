@@ -48,8 +48,8 @@ export const myChannelsSlice = createSlice({
       return state.concat(newChannels);
     },
     removeChannel(state, action) {
-      const removeChannelIds = action.payload.map((channel: MyChannelState) => channel.id);
-      return state.filter(channel => !removeChannelIds.includes(channel.id));
+      const sansRemovedChannelIds = action.payload.map((channel: MyChannelState) => channel.id);
+      return state.filter(channel => sansRemovedChannelIds.includes(channel.id));
     }
   },
   extraReducers: (builder) => {
@@ -60,8 +60,8 @@ export const myChannelsSlice = createSlice({
       return state.concat(newChannels);
     })
     .addCase(removeChannelFromUser.fulfilled, (state, action) => {
-      const removeChannelIds = action.payload.map((channel: MyChannelState) => channel.id);
-      return state.filter(channel => !removeChannelIds.includes(channel.id));
+      const sansRemovedChannelIds = action.payload.map((channel: MyChannelState) => channel.id);
+      return state.filter(channel => sansRemovedChannelIds.includes(channel.id));
     })
   }
 });
