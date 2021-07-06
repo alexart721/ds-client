@@ -44,6 +44,7 @@ export interface Issue {
   tags?: string[];
   threadMessages?: MessageData[];
   createdAt?: Date;
+  imageFile?: {file: {originFileObj: File}};
 }
 
 export interface IssueWithChannelId extends Issue {
