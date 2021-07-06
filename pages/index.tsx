@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link'
 import { Button } from 'antd';
-import ChannelsBar from '../components/ChannelsBar/ChannelsBar';
+import SideBar from '../components/SideBar/SideBar';
 import NavBar from '../components/NavBar/NavBar';
 import { GetServerSideProps } from 'next';
 import { checkToken, getUserApi } from '../services';
@@ -21,7 +21,7 @@ const Home: React.FC<{ user: User, accessToken: string }> = ({ user, accessToken
 
   return (
     <div style={{display:"flex", flexDirection:"row"}}>
-      <ChannelsBar />
+      <SideBar />
       <div style={{display:"flex", flexDirection:"column"}}>
         <NavBar />
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height:"100%"}}>

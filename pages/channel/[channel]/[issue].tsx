@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import ChannelsBar from '../../../components/ChannelsBar/ChannelsBar';
+import SideBar from '../../../components/SideBar/SideBar';
 import ChannelNavBar from '../../../components/ChannelNavBar/ChannelNavBar';
 import IssueMessage from '../../../components/IssueMessage/IssueMessage';
 
@@ -12,7 +12,7 @@ const ChannelIssue = () => {
 
   return (
     <div style={{display:"flex", flexDirection:"row"}}>
-      <ChannelsBar />
+      <SideBar />
       <div>
         <ChannelNavBar channel={channel} issue={issue}/>
         <IssueMessage issue={issue}/>

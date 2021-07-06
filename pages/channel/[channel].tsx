@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from '../../lib/hooks/useTypedSelector';
-import ChannelsBar from '../../components/ChannelsBar/ChannelsBar';
+import SideBar from '../../components/SideBar/SideBar';
 import ChannelNavBar from '../../components/ChannelNavBar/ChannelNavBar';
 import IssuesList from '../../components/IssueList/IssueList';
 import { getChannelIssuesApi } from '../../services';
@@ -35,7 +35,7 @@ const ChannelIssues = () => {
 
   return (
     <div style={{display:"flex", flexDirection:"row"}}>
-      <ChannelsBar />
+      <SideBar />
       <div style={{display:"flex", flexDirection:"column"}}>
         <div>
           {channel && <ChannelNavBar channel={channel}/>}
