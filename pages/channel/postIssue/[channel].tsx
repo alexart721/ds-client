@@ -61,14 +61,9 @@ const { Option } = Select;
 
 const PostIssue: React.FC = () => {
   const router = useRouter();
-  const [channelId, setChannelId] = useState('');
-
-  useEffect(() => {
-    const newChannelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
-    if (newChannelId) setChannelId(newChannelId);
-  }, [router.query.channel])
 
   const onSubmit = async (values: any) => {
+    const channelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
     const issueData: IssueWithChannelId = {
       ...values, channelId
     };
