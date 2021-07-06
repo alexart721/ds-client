@@ -25,10 +25,11 @@ export const addIssueToChannelApi = (newIssue: Issue, channelId: string): Promis
   formData.append('heartRate',newIssue.patientVitals.heartRate);
   formData.append('bloodPressure',newIssue.patientVitals.bloodPressure);
   if (newIssue.issueDescription) formData.append('issueDescription',newIssue.issueDescription);
-  if (newIssue.imageUrl) formData.append('image',newIssue.imageUrl);
+  if (newIssue.imageFile) formData.append('image', newIssue.imageFile.file.originFileObj);
+  console.log(newIssue.imageUrl);
   return fetch (BASE_URL + `/channels/${channelId}/issues`, {
     method: 'POST',
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers: {
       'Authorization': `Bearer: ${token}`,
     },
