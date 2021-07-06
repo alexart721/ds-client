@@ -13,23 +13,23 @@ const layout = {
   wrapperCol: { span: 8 },
 };
 
-const props = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  // onChange(info) {
-  //   if (info.file.status !== 'uploading') {
-  //     console.log(info.file, info.fileList);
-  //   }
-  //   if (info.file.status === 'done') {
-  //     message.success(`${info.file.name} file uploaded successfully`);
-  //   } else if (info.file.status === 'error') {
-  //     message.error(`${info.file.name} file upload failed.`);
-  //   }
-  // },
-};
+// const props = {
+//   name: 'file',
+//   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+//   headers: {
+//     authorization: 'authorization-text',
+//   },
+//   // onChange(info) {
+//   //   if (info.file.status !== 'uploading') {
+//   //     console.log(info.file, info.fileList);
+//   //   }
+//   //   if (info.file.status === 'done') {
+//   //     message.success(`${info.file.name} file uploaded successfully`);
+//   //   } else if (info.file.status === 'error') {
+//   //     message.error(`${info.file.name} file upload failed.`);
+//   //   }
+//   // },
+// };
 
 const validateMessages = {
   required: '${label} is required!',
@@ -128,8 +128,8 @@ const PostIssue: React.FC = () => {
             <Form.Item name='issueDescription' label="Issue Description">
               <Input.TextArea autoSize={{ minRows: 3, maxRows: 3 }}/>
             </Form.Item>
-            <Form.Item name='imageUrl' label="Upload Image">
-              <Upload {...props}>
+            <Form.Item name='imageFile' label="Upload Image">
+              <Upload>
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
               </Upload>
             </Form.Item>

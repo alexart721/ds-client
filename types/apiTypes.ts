@@ -32,6 +32,7 @@ export interface Issue {
   status: string;
   issueOwner?: string;
   issueOwnerName?: string;
+  issueChannelName?: string;
   patientAge: number;
   patientGender: string;
   patientMedicalIssues: string;
@@ -43,6 +44,7 @@ export interface Issue {
   tags?: string[];
   threadMessages?: MessageData[];
   createdAt?: Date;
+  imageFile?: {file: {originFileObj: File}};
 }
 
 export interface IssueWithChannelId extends Issue {
