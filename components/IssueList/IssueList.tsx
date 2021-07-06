@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import IssueItem from '../IssueItem/IssueItem';
 import { MyIssueState } from '../../lib/redux/reducers';
+import { Issue } from '../../types';
 
 interface Props {
-  issues: MyIssueState[],
+  issues: Issue[],
   channel: string,
 }
 
@@ -13,8 +14,8 @@ const IssuesList: FC<Props> = ({ issues, channel }) => {
       {
         issues && issues.map( issue => {
           return(
-            <IssueItem 
-              key = {issue.id}
+            <IssueItem
+              key = {issue._id}
               issue = {issue}
               channel= {channel}
             />
@@ -22,7 +23,7 @@ const IssuesList: FC<Props> = ({ issues, channel }) => {
         })
       }
     </div>
-    
+
   )
 };
 

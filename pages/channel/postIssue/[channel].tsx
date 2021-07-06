@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Form, Input, InputNumber, Select, Button, Upload, message } from 'antd';
 import ChannelsBar from '../../../components/ChannelsBar/ChannelsBar';
@@ -60,19 +60,13 @@ const { Option } = Select;
 // }
 
 const PostIssue: React.FC = () => {
-
   const router = useRouter();
+  const [channelId, setChannelId] = useState('');
 
-  const channelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
-  // const [postIssue, setPostIssue] = useState<Issue>(initialState)
-
-  // const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({target}) => {
-  //   setPostIssue((oldIssue: Issue) => ({...oldIssue, [target.name]: target.value}))
-  // };
-
-  // const handleChangeAge = (value: number) => {
-  //   setPostIssue((oldIssue: Issue) => ({...oldIssue, patientAge: value}))
-  // };
+  useEffect(() => {
+    const newChannelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
+    if (newChannelId) setChannelId(newChannelId);
+  }, [router.query.channel])
 
   const onSubmit = async (values: any) => {
     const issueData: IssueWithChannelId = {
@@ -88,9 +82,9 @@ const PostIssue: React.FC = () => {
       <div style={{display:"flex", flexDirection:"column"}}>
         <PostIssueNavBar />
         <div style={{margin:"4rem", justifyContent:"center"}} >
-          <Form 
-            {...layout} 
-            name="nest-messages" 
+          <Form
+            {...layout}
+            name="nest-messages"
             validateMessages={validateMessages}
             onFinish={onSubmit}>
             <Form.Item name='title' label="Title" rules={[{ required: true }]}>

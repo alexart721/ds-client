@@ -24,10 +24,16 @@ const initialState: MyIssueState[] = [];
 export const addIssueToChannel = createAsyncThunk<MyIssueState[], IssueWithChannelId>(
   'issues/addToChannel',
   async (issueWithChannel: IssueWithChannelId) => {
+    console.log('issueWithChannel: ', issueWithChannel);
+
     const { channelId } = issueWithChannel;
     const issue = _.omit(issueWithChannel, ['channelId']);
+    console.log('issue: ', issue);
+
     const newIssue: Issue = await issuesApi.addIssueToChannelApi(issue, channelId).then(res => res.json());
     const userWithIssue: User = await issuesApi.addIssueToUserApi(newIssue).then(res => res.json());
+    console.log('userWithIssue: ', userWithIssue);
+
     return userWithIssue.issueMeta;
   }
 );
@@ -62,6 +68,8 @@ export const myIssuesSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addCase(addIssueToChannel.fulfilled, (state, action) => {
+      console.log('action.payload: ', action.payload);
+
       const stateIssueIds = state.map((issue: MyIssueState) => issue.id);
       const newIssues = action.payload.filter((issue: MyIssueState) => !stateIssueIds.includes(issue.id));
       return state.concat(newIssues);
