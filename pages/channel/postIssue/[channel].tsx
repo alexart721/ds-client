@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Form, Input, InputNumber, Select, Button, Upload, message } from 'antd';
 import ChannelsBar from '../../../components/ChannelsBar/ChannelsBar';
 import PostIssueNavBar from '../../../components/PostIssueNavBar/PostIssueNavBar';
 import { UploadOutlined } from '@ant-design/icons';
-import { Issue } from '../../../types';
+import { Issue, IssueWithChannelId } from '../../../types';
+import { store } from '../../../lib/redux/store';
+import  { addIssueToChannel } from '../../../lib/redux/reducers';
 
 const layout = {
   labelCol: { span: 8 },
@@ -41,23 +44,26 @@ const validateMessages = {
 
 const { Option } = Select;
 
-const initialState: Issue = {
-  title: '',
-  priority: '',
-  status: '',
-  patientAge: 0,
-  patientGender: '',
-  patientMedicalIssues: '',
-  patientMedications: '',
-  patientVitals: {
-    temperature: '',
-    heartRate: '',
-    bloodPressure: '',
-  },
-}
+// const initialState: Issue = {
+//   title: '',
+//   priority: '',
+//   status: '',
+//   patientAge: 0,
+//   patientGender: '',
+//   patientMedicalIssues: '',
+//   patientMedications: '',
+//   patientVitals: {
+//     temperature: '',
+//     heartRate: '',
+//     bloodPressure: '',
+//   },
+// }
 
 const PostIssue: React.FC = () => {
 
+  const router = useRouter();
+
+  const channelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
   // const [postIssue, setPostIssue] = useState<Issue>(initialState)
 
   // const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({target}) => {
@@ -68,8 +74,11 @@ const PostIssue: React.FC = () => {
   //   setPostIssue((oldIssue: Issue) => ({...oldIssue, patientAge: value}))
   // };
 
-  const onSubmit = (values: any) => {
-    console.log(values)
+  const onSubmit = async (values: any) => {
+    const issueData: IssueWithChannelId = {
+      ...values, channelId
+    };
+    store.dispatch(addIssueToChannel())
   }
 
   return (
@@ -83,14 +92,14 @@ const PostIssue: React.FC = () => {
             name="nest-messages" 
             validateMessages={validateMessages}
             onFinish={onSubmit}>
-            <Form.Item name="title" label="Title" rules={[{ required: true }]}>
+            <Form.Item name='title' label="Title" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name="patientAge" label="Patient Age" rules={[{ required: true, type: 'number', min: 0, max: 99 }]}>
+            <Form.Item name='patientAge' label="Patient Age" rules={[{ required: true, type: 'number', min: 0, max: 99 }]}>
               <InputNumber />
             </Form.Item>
             <Form.Item
-              name="patientGender"
+              name='patientGender'
               label="Patient Gender"
               rules={[{ required: true, message: 'Please select gender!' }]}
             >
@@ -101,7 +110,7 @@ const PostIssue: React.FC = () => {
               </Select>
             </Form.Item>
             <Form.Item
-              name="priority"
+              name='priority'
               label="Priority"
               rules={[{ required: true, message: 'Please select priority!' }]}
             >
@@ -111,19 +120,19 @@ const PostIssue: React.FC = () => {
                 <Option value="High">High</Option>
               </Select>
             </Form.Item>
-            <Form.Item name={['user', 'patientMedicalIssues']} label="Medical Issues" rules={[{ required: true }]}>
+            <Form.Item name='patientMedicalIssues' label="Medical Issues" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name={['user', 'patientMedications']} label="Medications" rules={[{ required: true }]}>
+            <Form.Item name='patientMedications' label="Medications" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name={['user', 'temperature']} label="Temperature" rules={[{ type: 'number', min: 99, max: 110 }]}>
-              <InputNumber />
+            <Form.Item name={['patientVitals', 'temperature']} label="Temperature">
+              <Input />
             </Form.Item>
-            <Form.Item name={['user', 'heart rate']} label="Heart Rate" rules={[{ type: 'number'}]}>
-              <InputNumber />
+            <Form.Item name={['patientVitals', 'heartRate']} label="Heart Rate">
+              <Input />
             </Form.Item>
-            <Form.Item name={['user', 'blood pressure']} label="Blood Pressure">
+            <Form.Item name={['patientVitals', 'bloodPressure']} label="Blood Pressure">
               <Input />
             </Form.Item>
             {/* <Form.Item name={['user', 'blood pressure sbp']} label="Blood Presure (SBP)" rules={[{ type: 'number'}]}>
@@ -132,10 +141,10 @@ const PostIssue: React.FC = () => {
             <Form.Item name={['user', 'blood pressure dbp']} label="Blood Presure (DBP)" rules={[{ type: 'number'}]}>
               <InputNumber />
             </Form.Item> */}
-            <Form.Item name={['user', 'issue description']} label="Issue Description">
+            <Form.Item name='issueDescription' label="Issue Description">
               <Input.TextArea autoSize={{ minRows: 3, maxRows: 3 }}/>
             </Form.Item>
-            <Form.Item name={['user', 'upload image']} label="Upload Image">
+            <Form.Item name='imageUrl' label="Upload Image">
               <Upload {...props}>
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
               </Upload>
