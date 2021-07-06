@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
-import ChannelsBar from '../components/ChannelsBar/ChannelsBar';
+import SideBar from '../components/SideBar/SideBar';
 import NavBar from '../components/NavBar/NavBar';
 import SubscribeMenu from '../components/SubscribeMenu/SubscribeMenu';
 import { getSubscribeChannels } from '../services';
@@ -50,7 +50,7 @@ const SubscribeChannel: React.FC = () => {
 
   return (
     <div style={{display:"flex", flexDirection:"row"}}>
-      <ChannelsBar />
+      <SideBar />
       <div style={{display:"flex", flexDirection:"column"}}>
         <NavBar />
         <div style={{height:"100%", display:"flex", flexDirection:"column", alignItems:"flex-start"}}>

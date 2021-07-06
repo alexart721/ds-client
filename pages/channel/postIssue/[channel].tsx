@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Form, Input, InputNumber, Select, Button, Upload, message } from 'antd';
-import ChannelsBar from '../../../components/ChannelsBar/ChannelsBar';
+import SideBar from '../../../components/SideBar/SideBar';
 import PostIssueNavBar from '../../../components/PostIssueNavBar/PostIssueNavBar';
 import { UploadOutlined } from '@ant-design/icons';
 import { Issue, IssueWithChannelId } from '../../../types';
@@ -73,7 +73,7 @@ const PostIssue: React.FC = () => {
 
   return (
     <div style={{display:"flex", flexDirection:"row"}}>
-      <ChannelsBar />
+      <SideBar />
       <div style={{display:"flex", flexDirection:"column"}}>
         <PostIssueNavBar />
         <div style={{margin:"4rem", justifyContent:"center"}} >
