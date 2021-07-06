@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, InputNumber, Select, Button, Upload, message } from 'antd';
 import ChannelsBar from '../../../components/ChannelsBar/ChannelsBar';
 import PostIssueNavBar from '../../../components/PostIssueNavBar/PostIssueNavBar';
 import { UploadOutlined } from '@ant-design/icons';
+import { Issue } from '../../../types';
 
 const layout = {
   labelCol: { span: 8 },
@@ -40,7 +41,36 @@ const validateMessages = {
 
 const { Option } = Select;
 
-const PostIssue = () => {
+const initialState: Issue = {
+  title: '',
+  priority: '',
+  status: '',
+  patientAge: 0,
+  patientGender: '',
+  patientMedicalIssues: '',
+  patientMedications: '',
+  patientVitals: {
+    temperature: '',
+    heartRate: '',
+    bloodPressure: '',
+  },
+}
+
+const PostIssue: React.FC = () => {
+
+  // const [postIssue, setPostIssue] = useState<Issue>(initialState)
+
+  // const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({target}) => {
+  //   setPostIssue((oldIssue: Issue) => ({...oldIssue, [target.name]: target.value}))
+  // };
+
+  // const handleChangeAge = (value: number) => {
+  //   setPostIssue((oldIssue: Issue) => ({...oldIssue, patientAge: value}))
+  // };
+
+  const onSubmit = (values: any) => {
+    console.log(values)
+  }
 
   return (
     <div style={{display:"flex", flexDirection:"row"}}>
@@ -48,22 +78,37 @@ const PostIssue = () => {
       <div style={{display:"flex", flexDirection:"column"}}>
         <PostIssueNavBar />
         <div style={{margin:"4rem", justifyContent:"center"}} >
-          <Form {...layout} name="nest-messages" validateMessages={validateMessages}>
-            <Form.Item name={['user', 'title']} label="Title" rules={[{ required: true }]}>
+          <Form 
+            {...layout} 
+            name="nest-messages" 
+            validateMessages={validateMessages}
+            onFinish={onSubmit}>
+            <Form.Item name="title" label="Title" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name={['user', 'age']} label="Age" rules={[{ required: true, type: 'number', min: 0, max: 99 }]}>
+            <Form.Item name="patientAge" label="Patient Age" rules={[{ required: true, type: 'number', min: 0, max: 99 }]}>
               <InputNumber />
             </Form.Item>
             <Form.Item
-              name="gender"
-              label="Gender"
+              name="patientGender"
+              label="Patient Gender"
               rules={[{ required: true, message: 'Please select gender!' }]}
             >
               <Select placeholder="select patient gender">
-                <Option value="male">Male</Option>
-                <Option value="female">Female</Option>
-                <Option value="other">Other</Option>
+                <Option value="Male">Male</Option>
+                <Option value="Female">Female</Option>
+                <Option value="Other">Other</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              name="priority"
+              label="Priority"
+              rules={[{ required: true, message: 'Please select priority!' }]}
+            >
+              <Select placeholder="select issue priority">
+                <Option value="Low">Low</Option>
+                <Option value="Medium">Medium</Option>
+                <Option value="High">High</Option>
               </Select>
             </Form.Item>
             <Form.Item name={['user', 'patientMedicalIssues']} label="Medical Issues" rules={[{ required: true }]}>
