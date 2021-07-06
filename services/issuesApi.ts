@@ -33,7 +33,6 @@ export const addIssueToChannelApi = (newIssue: Issue, channelId: string): Promis
     method: 'POST',
     mode: 'no-cors',
     headers: {
-      'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer: ${token}`,
     },
     body: formData,
