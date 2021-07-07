@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import SideBar from '../../../components/SideBar/SideBar';
 import ChannelNavBar from '../../../components/ChannelNavBar/ChannelNavBar';
 import IssueMessage from '../../../components/IssueMessage/IssueMessage';
-import { getIssueByIdApi } from '../../../services';
+import { BASE_URL, getIssueByIdApi } from '../../../services';
 import { Issue } from '../../../types';
 import styles from '../../../styles/ChannelIssue.module.css';
 
@@ -40,7 +40,7 @@ const ChannelIssue = () => {
 
 
   const getIssuebyId = async (issue: string) => {
-    const issueData: Issue = await getIssueByIdApi(issue).then(res => res.json());
+    const issueData: Issue = await getIssueByIdApi(issue, BASE_URL).then(res => res.json());
     setSingleIssue(issueData);
   }
 

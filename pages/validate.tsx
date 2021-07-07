@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-<<<<<<< HEAD
-import { BASE_AUTH_URL, checkToken, getUserApi } from '../services';
-=======
 import { useRouter } from 'next/router';
 import { Spin } from 'antd';
 import { checkToken, getUserApi } from '../services';
->>>>>>> eeadd2febf6b3e3e19643b6e342e89f92f4073f8
 import { User } from '../types';
 import { store } from '../lib/redux/store';
 import { myChannelsSlice, myIssuesSlice } from '../lib/redux/reducers';

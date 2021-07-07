@@ -1,9 +1,20 @@
-import { BASE_AUTH_URL, BASE_URL_SERVER_SIDE } from '.';
+import { BASE_AUTH_URL, BASE_URL, BASE_URL_SERVER_SIDE } from '.';
 import { Issue } from '../types';
 
 export const getChannelIssuesApi = (channelId: string, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
   return fetch(url + `/channels/${channelId}/issues`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer: ${token}`
+    },
+  });
+};
+
+export const getIssueByIdApi = (issueId: string, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
+  let token = localStorage.getItem('accessToken');
+  return fetch(url + `/issues/${issueId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
