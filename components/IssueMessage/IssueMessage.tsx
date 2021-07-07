@@ -1,11 +1,16 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Input, message } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import styles from './IssueMessage.module.css';
-import { Issue } from '../../types';
+import { Issue, MessageData } from '../../types';
 // import io from 'socket.io-client';
 import sockets from '../../sockets';
+import MessageList from '../MessageList/MessageList';
+import { store } from '../../lib/redux/store';
+import { UserState } from '../../lib/redux/reducers';
+import { useSelector } from '../../lib/hooks/useTypedSelector';
+import { BASE_URL } from '../../services';
 
 interface Props {
   issue: Issue,
@@ -21,20 +26,64 @@ const SendIcon = (<SendOutlined
                   />)
 
 const IssueMessage: FC<Props>  = ({ issue }) => {
-  const [messageTest, setMessageTest] = useState('');
-  const socket = sockets.init();
-  socket.on('connection', () => {
-    socket.emit('join_room', `${issue}`);
-  });
-  socket.on('broadcast_message', (message: string) => {
-    console.log(message);
 
-    setMessageTest(message);
-  });
+  const [messages, setMessages] = useState<MessageData[]>(issue.threadMessages || []);
+  const userInfo = useSelector((store) => store.user);
+  const socket = useSelector((store) => store.socket.socket);
+
+  useEffect(() => {
+    // Get messages from issue
+    // console.log(issue.threadMessages);
+    // if (issue.threadMessages && issue.threadMessages.length > messages.length) {
+    //   setMessages(issue.threadMessages);
+    // }
+    // console.log('store', store.getState());
+    // if (!userInfo) {
+    //   userInfo = store.getState().user;
+    // }
+//
+    if (socket && issue._id) {
+      console.log('Loading socket...');
+      socket.emit('leave_all_rooms', `${issue._id}`);
+console.log('Issue id when joining room:', issue._id);
+      socket.emit('join_room', `${issue._id}`);
+      socket.off('broadcast_message');
+      socket.on('broadcast_message', (message: MessageData) => {
+        console.log('Message received', message);
+        setMessages(oldMessages => {
+          if (!oldMessages.includes(message)) {
+            return oldMessages.concat(message);
+          }
+          return oldMessages;
+        });
+      });
+    }
+    return () => {
+      socket.off('broadcast_message');
+      socket.emit('leave_all_rooms', `${issue._id}`);
+    }
+  }, [issue._id, socket]);
+
+  useEffect(() => {
+    if (issue.threadMessages) {
+      setMessages(issue.threadMessages);
+    }
+  }, [issue.threadMessages]);
+
+  // *****
+  // * Socket.io stuff
+  // *****
+
+
+
   const onSubmit = async (values: string) => {
-    console.log(values);
-
-    socket.emit('message', { room: `${issue}`, message: `${values}` });
+    const newMessage: MessageData = {
+      messageOwnerId: userInfo.id,
+      messageOwnerName: `Dr. ${userInfo.firstName} ${userInfo.lastName}`,
+      content: values,
+    }
+    console.log(newMessage);
+    socket.emit('room_message', { room: `${issue._id}`, message: newMessage });
   }
 
   return (
@@ -53,21 +102,22 @@ const IssueMessage: FC<Props>  = ({ issue }) => {
           <p className={styles.details1}>Gender: <span className={styles.details2}>{issue.patientGender}</span></p>
           <p className={styles.details1}>Medical Issues: <span className={styles.details2}>{issue.patientMedicalIssues}</span></p>
           <p className={styles.details1}>Medication: <span className={styles.details2}>{issue.patientMedications}</span></p>
-          {issue.patientVitals.temperature !=='undefined' && 
-            issue.patientVitals.bloodPressure !== 'undefined' && 
+          {issue.patientVitals.temperature !=='undefined' &&
+            issue.patientVitals.bloodPressure !== 'undefined' &&
             issue.patientVitals.heartRate !== 'undefined' &&
             <p className={styles.details1}>Vitals:</p>}
-          { issue.patientVitals.temperature !=='undefined' && 
-            issue.patientVitals.bloodPressure !== 'undefined' && 
+          { issue.patientVitals.temperature !=='undefined' &&
+            issue.patientVitals.bloodPressure !== 'undefined' &&
             issue.patientVitals.heartRate !== 'undefined' &&
             <p className={styles.details2}>&emsp;&emsp;&emsp;Temp: {issue.patientVitals.temperature}F, BP: {issue.patientVitals.bloodPressure}, HR: {issue.patientVitals.heartRate} bpm</p>}
+          {issue.imageUrl ?<>
           <p className={styles.details1}>Picture:</p>
-          &emsp;&emsp;&emsp;<img style={{height:"200px", width:"200px"}} src="https://advancedtissue.com/wp-content/uploads/cut-finger.jpg"/><br/><br/>
+            &emsp;&emsp;&emsp;<img style={{height:"200px", width:"200px"}} src={`${BASE_URL}${issue.imageUrl}`}/><br/><br/></> : null}
         </div>
     </div>
     <div>
       <div className={styles.outerDiv1}>
-        <p>{messageTest}</p>
+        <MessageList messages={messages} />
       </div>
       <div className={styles.messageBarDiv}>
         <Search
@@ -78,7 +128,7 @@ const IssueMessage: FC<Props>  = ({ issue }) => {
           onSearch={onSubmit}
         />
       </div>
-      
+
     </div>
     </>
   );

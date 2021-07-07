@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import styles from './IssueItem.module.css';
 import { Issue } from '../../types';
 import moment from 'moment';
+import { BASE_URL } from '../../services';
 
 interface Props {
   issue: Issue,
@@ -19,6 +20,8 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
     e.preventDefault();
     setState(!state);
   }
+
+  console.log(`"${BASE_URL}${issue.imageUrl}"`);
 
   return (
     <div className = {styles.outerDiv}>
@@ -51,8 +54,9 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
           <p className={styles.details1}>Medication: <span className={styles.details2}>{issue.patientMedications}</span></p>
           <p className={styles.details1}>Vitals:</p>
           <p className={styles.details2}>&emsp;&emsp;&emsp;Temp: {issue.patientVitals.temperature}, BP: {issue.patientVitals.bloodPressure}, HR: {issue.patientVitals.heartRate}</p>
+          {issue.imageUrl ?<>
           <p className={styles.details1}>Picture:</p>
-          &emsp;&emsp;&emsp;<img style={{height:"200px", width:"200px"}} src="https://advancedtissue.com/wp-content/uploads/cut-finger.jpg"/><br/><br/>
+            &emsp;&emsp;&emsp;<img style={{height:"200px", width:"200px"}} src={`${BASE_URL}${issue.imageUrl}`}/><br/><br/></> : null}
           <Button type="primary" onClick={clickHandler} style={{marginRight:"1rem"}}>Collapse</Button>
           <Link href="/channel/[channel]/[issue]" as={`/channel/${channel}/${issue._id}`}><Button type="primary">Respond</Button></Link>
         </div>
