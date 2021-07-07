@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as issuesApi from '../../../services/issuesApi';
 import { Issue, IssueWithChannelId, User } from '../../../types';
 import _ from 'lodash';
+import { BASE_URL } from '../../../services';
 
 const initialState: MyIssueState[] = [];
 
@@ -11,7 +12,7 @@ export const addIssueToChannel = createAsyncThunk<MyIssueState | null, IssueWith
   async (issueWithChannel: IssueWithChannelId) => {
     const { channelId } = issueWithChannel;
     const issue = _.omit(issueWithChannel, ['channelId']);
-    const newIssue: Issue = await issuesApi.addIssueToChannelApi(issue, channelId).then(res => res.json());
+    const newIssue: Issue = await issuesApi.addIssueToChannelApi(issue, channelId, BASE_URL).then(res => res.json());
     let newIssueState: MyIssueState | null = null;
     if (newIssue) newIssueState = {
       id: newIssue._id as string,
@@ -27,8 +28,8 @@ export const closeIssue = createAsyncThunk(
   async (closingIssueWithChannel: IssueWithChannelId) => {
     const { channelId } = closingIssueWithChannel;
     const closingIssue = _.omit(closingIssueWithChannel, ['channelId']);
-    await issuesApi.closeIssueApi(closingIssue).then(res => res.json());
-    await issuesApi.archiveIssueApi(closingIssue, channelId).then(res => res.json());
+    await issuesApi.closeIssueApi(closingIssue, BASE_URL).then(res => res.json());
+    await issuesApi.archiveIssueApi(closingIssue, channelId, BASE_URL).then(res => res.json());
     const userWithoutIssue: User = await issuesApi.updateUserIssueMetaApi(closingIssue).then(res => res.json());
     return userWithoutIssue.issueMeta;
     // Add to archive state, when written
@@ -40,11 +41,13 @@ export const myIssuesSlice = createSlice({
   initialState,
   reducers: {
     addIssue(state, action) {
-      return state.concat(action.payload);
+      const stateIssueIds = state.map((issue: MyIssueState) => issue.id);
+      const newIssues = action.payload.filter((issue: MyIssueState) => !stateIssueIds.includes(issue.id));
+      return state.concat(newIssues);
     },
     closeIssue(state, action) {
       const sansRemovedIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
-      state.filter(issue => sansRemovedIssueIds.includes(issue.id));
+      return state.filter(issue => sansRemovedIssueIds.includes(issue.id));
     }
   },
   extraReducers: (builder) => {
@@ -54,7 +57,7 @@ export const myIssuesSlice = createSlice({
     })
     .addCase(closeIssue.fulfilled, (state, action) => {
       const sansRemovedIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
-      state.filter(issue => sansRemovedIssueIds.includes(issue.id));
+      return state.filter(issue => sansRemovedIssueIds.includes(issue.id));
     })
   }
 });
