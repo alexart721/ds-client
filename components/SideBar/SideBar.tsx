@@ -4,7 +4,7 @@ import { Menu } from 'antd';
 import Link from 'next/link';
 import ChannelItem from '../ChannelItem/ChannelItem';
 import MyIssueItem from '../MyIssueItem/MyIssueItem';
-import { logoutUser } from '../../services';
+import { BASE_AUTH_URL, BASE_CLIENT_URL, logoutUser } from '../../services';
 
 const SideBar = () => {
   const router = useRouter();
@@ -16,9 +16,9 @@ const SideBar = () => {
   const handleLogout = async () => {
     const logout = confirm('Are you sure you want to logout now?');
     if (logout) {
-      await logoutUser();
+      await logoutUser(BASE_AUTH_URL);
       localStorage.removeItem('accessToken');
-      router.push('http://localhost:3001/');
+      window.location.assign(BASE_CLIENT_URL);
     }
   };
 
