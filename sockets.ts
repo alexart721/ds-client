@@ -5,7 +5,7 @@ let socket: any;
 
 function init() {
   console.log('init');
-  socket = socketClient(BASE_CLIENT_URL, { path: '/api/socket.io' });
+  socket = socketClient(BASE_CLIENT_URL);//, { path: '/api/socket.io' });
   socket.on('connection', () => {
     console.log('Connected to socketIO backend');
   });
