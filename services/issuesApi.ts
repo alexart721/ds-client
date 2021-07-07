@@ -12,6 +12,17 @@ export const getChannelIssuesApi = (channelId: string): Promise<Response> => {
   });
 };
 
+export const getIssueByIdApi = (issueId: string): Promise<Response> => {
+  let token = localStorage.getItem('accessToken');
+  return fetch(BASE_URL + `/issues/${issueId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer: ${token}`
+    },
+  });
+};
+
 export const addIssueToChannelApi = (newIssue: Issue, channelId: string): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
   const formData = new FormData();

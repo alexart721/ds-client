@@ -35,7 +35,8 @@ const ChannelIssues = () => {
   }, [])
 
   return (
-    <div style={{display:"flex", flexDirection:"row"}}>
+    <div style={{display:"flex", flexDirection:"row", 
+          fontFamily:"'Libre Caslon Text', serif", backgroundColor:"rgba(228, 253, 248, 0.75)"}}>
       <SideBar />
       <div style={{display:"flex", flexDirection:"column"}}>
         <div>

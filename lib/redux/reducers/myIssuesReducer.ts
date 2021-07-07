@@ -4,21 +4,6 @@ import * as issuesApi from '../../../services/issuesApi';
 import { Issue, IssueWithChannelId, User } from '../../../types';
 import _ from 'lodash';
 
-// const initialState: MyIssueState[] = [
-//   {
-//     id: '1',
-//     title: 'Bleeding fingernails',
-//   },
-//   {
-//     id: '2',
-//     title: 'Varicose veins',
-//   },
-//   {
-//     id: '3',
-//     title: 'Arrhythmia',
-//   }
-// ];
-
 const initialState: MyIssueState[] = [];
 
 export const addIssueToChannel = createAsyncThunk<MyIssueState | null, IssueWithChannelId>(
@@ -55,8 +40,6 @@ export const myIssuesSlice = createSlice({
   initialState,
   reducers: {
     addIssue(state, action) {
-      console.log(action.payload);
-
       return state.concat(action.payload);
     },
     closeIssue(state, action) {
@@ -74,4 +57,4 @@ export const myIssuesSlice = createSlice({
       state.filter(issue => sansRemovedIssueIds.includes(issue.id));
     })
   }
-})
+});

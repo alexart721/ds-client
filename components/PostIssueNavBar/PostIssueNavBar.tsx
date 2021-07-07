@@ -13,7 +13,7 @@ const PostIssueNavBar = () => {
   const {channel} = router.query;
   
   return (
-    <div>
+    <div className={styles.postIssueNavBarDiv}>
       <Header className={styles.sitePageHeader}>
         <div>
           #{channel} - New Issue
