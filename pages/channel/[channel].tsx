@@ -4,7 +4,7 @@ import { useSelector } from '../../lib/hooks/useTypedSelector';
 import SideBar from '../../components/SideBar/SideBar';
 import ChannelNavBar from '../../components/ChannelNavBar/ChannelNavBar';
 import IssuesList from '../../components/IssueList/IssueList';
-import { getChannelIssuesApi } from '../../services';
+import { BASE_URL, getChannelIssuesApi } from '../../services';
 import { store } from '../../lib/redux/store';
 import { Issue } from '../../types';
 
@@ -17,7 +17,7 @@ const ChannelIssues = () => {
   const [channelIssues, setChannelIssues] = useState(initialChannelIssues);
 
   const fetchIssues = async (channelId: string) => {
-    const newChannelIssues = await getChannelIssuesApi(channelId).then(res => res.json());
+    const newChannelIssues = await getChannelIssuesApi(channelId, BASE_URL).then(res => res.json());
     setChannelIssues(newChannelIssues);
   }
 

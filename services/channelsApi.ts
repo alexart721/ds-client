@@ -1,10 +1,10 @@
-import { BASE_URL } from '.';
+import { BASE_URL_SERVER_SIDE } from '.';
 import { MyChannelState } from '../lib/redux/reducers';
 
 
-export const addChannelsToUserApi = (newChannels: MyChannelState[]): Promise<Response> => {
+export const addChannelsToUserApi = (newChannels: MyChannelState[], url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL + '/users/channels/add', {
+  return fetch(url + '/users/channels/add', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -14,9 +14,9 @@ export const addChannelsToUserApi = (newChannels: MyChannelState[]): Promise<Res
   });
 };
 
-export const removeChannelFromUserApi = (removeChannel: MyChannelState): Promise<Response> => {
+export const removeChannelFromUserApi = (removeChannel: MyChannelState, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL + '/users/channels/:id', {
+  return fetch(url + '/users/channels/:id', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -26,9 +26,9 @@ export const removeChannelFromUserApi = (removeChannel: MyChannelState): Promise
   });
 };
 
-export const getSubscribeChannels = (): Promise<Response> => {
+export const getSubscribeChannels = (url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL + '/channels', {
+  return fetch(url + '/channels', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

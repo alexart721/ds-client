@@ -1,9 +1,9 @@
-import { BASE_AUTH_URL, BASE_URL } from '.';
+import { BASE_AUTH_URL, BASE_URL_SERVER_SIDE } from '.';
 import { Issue } from '../types';
 
-export const getChannelIssuesApi = (channelId: string): Promise<Response> => {
+export const getChannelIssuesApi = (channelId: string, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL + `/channels/${channelId}/issues`, {
+  return fetch(url + `/channels/${channelId}/issues`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ export const getChannelIssuesApi = (channelId: string): Promise<Response> => {
   });
 };
 
-export const addIssueToChannelApi = (newIssue: Issue, channelId: string): Promise<Response> => {
+export const addIssueToChannelApi = (newIssue: Issue, channelId: string, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
   const formData = new FormData();
   formData.append('title',newIssue.title);
@@ -27,7 +27,7 @@ export const addIssueToChannelApi = (newIssue: Issue, channelId: string): Promis
   if (newIssue.issueDescription) formData.append('issueDescription',newIssue.issueDescription);
   if (newIssue.imageFile) formData.append('image', newIssue.imageFile.file.originFileObj);
   console.log(newIssue.imageUrl);
-  return fetch (BASE_URL + `/channels/${channelId}/issues`, {
+  return fetch (url + `/channels/${channelId}/issues`, {
     method: 'POST',
     // mode: 'no-cors',
     headers: {
@@ -37,9 +37,9 @@ export const addIssueToChannelApi = (newIssue: Issue, channelId: string): Promis
   })
 };
 
-export const addIssueToUserApi = (newIssue: Issue): Promise<Response> => {
+export const addIssueToUserApi = (newIssue: Issue, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL + '/users/issues/add', {
+  return fetch(url + '/users/issues/add', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -49,9 +49,9 @@ export const addIssueToUserApi = (newIssue: Issue): Promise<Response> => {
   });
 };
 
-export const closeIssueApi = (closedIssue: Issue): Promise<Response> => {
+export const closeIssueApi = (closedIssue: Issue, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL + `/issues/${closedIssue._id}/resolve`, {
+  return fetch(url + `/issues/${closedIssue._id}/resolve`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -61,9 +61,9 @@ export const closeIssueApi = (closedIssue: Issue): Promise<Response> => {
   });
 };
 
-export const archiveIssueApi = (archivedIssue: Issue, channelId: string): Promise<Response> => {
+export const archiveIssueApi = (archivedIssue: Issue, channelId: string, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL + `/channels/${channelId}/issues`, {
+  return fetch(url + `/channels/${channelId}/issues`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -73,9 +73,9 @@ export const archiveIssueApi = (archivedIssue: Issue, channelId: string): Promis
   });
 };
 
-export const updateUserIssueMetaApi = (issueToRemove: Issue): Promise<Response> => {
+export const updateUserIssueMetaApi = (issueToRemove: Issue, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL + '/users/issues/remove', {
+  return fetch(url + '/users/issues/remove', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

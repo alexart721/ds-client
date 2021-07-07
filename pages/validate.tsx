@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-import { checkToken, getUserApi } from '../services';
+import { BASE_AUTH_URL, checkToken, getUserApi } from '../services';
 import { User } from '../types';
 import { store } from '../lib/redux/store';
 import { myChannelsSlice, myIssuesSlice } from '../lib/redux/reducers';
