@@ -1,0 +1,9 @@
+.issueDiv {
+  height: 93vh;
+  overflow-x: scroll;
+  font-family: 'Libre Caslon Text', serif;
+}
+
+.issueDiv::-webkit-scrollbar {
+  display: none;
+}

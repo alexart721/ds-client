@@ -1,0 +1,22 @@
+.outerDiv {
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(228, 253, 248, 0.75);
+  font-family: 'Libre Caslon Text', serif;
+}
+
+.navBarDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.formDiv {
+  margin-top: 4rem;
+  justify-content: center;
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+.formDiv::-webkit-scrollbar {
+  display: none;
+}

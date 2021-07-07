@@ -7,29 +7,12 @@ import { UploadOutlined } from '@ant-design/icons';
 import { IssueWithChannelId } from '../../../types';
 import { store } from '../../../lib/redux/store';
 import  { addIssueToChannel } from '../../../lib/redux/reducers';
+import styles from '../../../styles/PostIssue.module.css';
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 8 },
 };
-
-// const props = {
-//   name: 'file',
-//   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-//   headers: {
-//     authorization: 'authorization-text',
-//   },
-//   // onChange(info) {
-//   //   if (info.file.status !== 'uploading') {
-//   //     console.log(info.file, info.fileList);
-//   //   }
-//   //   if (info.file.status === 'done') {
-//   //     message.success(`${info.file.name} file uploaded successfully`);
-//   //   } else if (info.file.status === 'error') {
-//   //     message.error(`${info.file.name} file upload failed.`);
-//   //   }
-//   // },
-// };
 
 const validateMessages = {
   required: '${label} is required!',
@@ -44,21 +27,6 @@ const validateMessages = {
 
 const { Option } = Select;
 
-// const initialState: Issue = {
-//   title: '',
-//   priority: '',
-//   status: '',
-//   patientAge: 0,
-//   patientGender: '',
-//   patientMedicalIssues: '',
-//   patientMedications: '',
-//   patientVitals: {
-//     temperature: '',
-//     heartRate: '',
-//     bloodPressure: '',
-//   },
-// }
-
 const PostIssue: React.FC = () => {
   const router = useRouter();
 
@@ -72,11 +40,11 @@ const PostIssue: React.FC = () => {
   }
 
   return (
-    <div style={{display:"flex", flexDirection:"row"}}>
+    <div className={styles.outerDiv}>
       <SideBar />
-      <div style={{display:"flex", flexDirection:"column"}}>
+      <div className={styles.navBarDiv}>
         <PostIssueNavBar />
-        <div style={{margin:"4rem", justifyContent:"center"}} >
+        <div className={styles.formDiv} >
           <Form
             {...layout}
             name="nest-messages"

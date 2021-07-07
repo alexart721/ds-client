@@ -1,6 +1,13 @@
 .sitePageHeader {
+  height: 7vh;
   background-color: #001529;
   width: 86vw;
-  font-size: large;
+  font-size: x-large;
   color: rgb(255, 255, 255);
+}
+
+.navBarDiv {
+  margin: 0;
+  padding: 0;
+  font-family: 'Libre Caslon Text', serif;
 }

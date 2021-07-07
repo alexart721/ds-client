@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { Spin } from 'antd';
 import { checkToken, getUserApi } from '../services';
 import { User } from '../types';
 import { store } from '../lib/redux/store';
 import { myChannelsSlice, myIssuesSlice } from '../lib/redux/reducers';
-import { useRouter } from 'next/router';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { accessToken } = context.query;
@@ -60,8 +61,19 @@ const Validate: React.FC<{ user: User, accessToken: string }> = ({ user, accessT
   }, []);
 
   return (
-    <div style={{display:"flex", flexDirection:"row"}}>
-      Validating credentials...
+    <div style={{display:"flex", 
+          flexDirection:"row", 
+          justifyContent:"center",
+          alignItems:"center",
+          height:"100vh", 
+          backgroundColor:"rgba(228, 253, 248, 0.75)",
+          fontFamily:"'Libre Caslon Text', serif"}}>
+      <Spin 
+        tip="Validating Credentials..."
+        size="large"
+        >
+      </Spin>
+      
     </div>
   );
 }

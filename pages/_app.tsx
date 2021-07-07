@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
@@ -9,6 +9,9 @@ import { getUserApi, checkToken } from '../services';
 import sockets from '../sockets';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+  const [state, setState] = useState('')
+
   // sockets.init();
   const refreshGuard = async (accessToken: string) => {
     const response = await checkToken(accessToken, 'User').then(res => res.json());
@@ -16,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (user) {
       store.dispatch(myChannelsSlice.actions.addChannel(user.channels));
       store.dispatch(myIssuesSlice.actions.addIssue(user.issueMeta));
+      setState(user.firstName);
     }
   }
 
@@ -26,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+      <Component {...pageProps} userName={state} />
     </Provider>
   );
 }

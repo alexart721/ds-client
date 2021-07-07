@@ -13,19 +13,19 @@ interface Props {
 const ChannelNavBar: FC<Props> = ({channel, issue}) => {
 
   return (
-    <div>
+    <div className={styles.channelsNavBarDiv}>
       <Header className={styles.sitePageHeader}>
         <div style={{display:"flex", justifyContent:"space-between"}}>
           {channel && issue ? <div>
-            #{channel} - {issue}
+            # {channel} - {issue}
           </div> :
           <div>
-            #{channel}
+            # {channel}
           </div>
           }
           <div style={{display:"flex", alignItems:"center"}}>
-            {channel && !issue && <Link href="/channel/postIssue/[channel]" as={`/channel/postIssue/${channel}`}><Button type="primary">&emsp;&emsp; Post Issue &emsp;&emsp;</Button></Link>}
-            {channel && !issue && <Link href="/"><Button type="primary">&emsp; Back To Home &emsp;</Button></Link>}  
+            {channel && !issue ? <Link href="/channel/postIssue/[channel]" as={`/channel/postIssue/${channel}`}><Button type="primary">&emsp;&emsp; Post Issue &emsp;&emsp;</Button></Link> :
+            <Link href="/channel/[channel]" as={`/channel/${channel}`}><Button type="primary">&emsp;&emsp; Back To Channel &emsp;&emsp;</Button></Link>}
           </div>
         </div>
       </Header>

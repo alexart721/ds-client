@@ -1,0 +1,6 @@
+.outerDiv {
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(228, 253, 248, 0.75);
+  font-family: 'Libre Caslon Text', serif;
+}
