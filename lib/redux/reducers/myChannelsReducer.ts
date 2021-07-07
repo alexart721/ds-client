@@ -1,7 +1,7 @@
 import { MyChannelState } from './stateTypes';
 import { User } from '../../../types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addChannelsToUserApi, removeChannelFromUserApi } from '../../../services';
+import { addChannelsToUserApi, BASE_URL, removeChannelFromUserApi } from '../../../services';
 import _ from 'lodash';
 
 const initialState: MyChannelState[] = [];
@@ -11,7 +11,7 @@ const initialState: MyChannelState[] = [];
 export const addChannelsToUser = createAsyncThunk<MyChannelState[], MyChannelState[]>(
   'channels/addToUser',
   async (channels: MyChannelState[]) => {
-    const channelsAdded: User = await addChannelsToUserApi(channels).then(res => res.json());
+    const channelsAdded: User = await addChannelsToUserApi(channels, BASE_URL).then(res => res.json());
     return channelsAdded.channels;
   }
 );
@@ -19,7 +19,7 @@ export const addChannelsToUser = createAsyncThunk<MyChannelState[], MyChannelSta
 export const removeChannelFromUser = createAsyncThunk<MyChannelState[], MyChannelState>(
   'channels/removeFromUser',
   async (channel: MyChannelState) => {
-    const channelsRemoved: User = await removeChannelFromUserApi(channel).then(res => res.json());
+    const channelsRemoved: User = await removeChannelFromUserApi(channel, BASE_URL).then(res => res.json());
     return channelsRemoved.channels;
   }
 );
