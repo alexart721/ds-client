@@ -26,7 +26,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (isString(accessToken)) {
     const response = await checkToken(accessToken, roles).then(res => res.json());
     if (response.message === 'Approved') {
-      user = await getUserApi(accessToken, response.id).then(res => res.json());
+      user = await getUserApi(accessToken, response.id).then(res => {
+        console.log(res.status);
+        return res.json();
+      });
 
       return {
         props: { user, accessToken },
@@ -47,7 +50,7 @@ const Validate: React.FC<{ user: User, accessToken: string }> = ({ user, accessT
 
     if (accessToken === 'not found') {
       alert('Credentials invalid');
-      router.push('http://localhost:3001');
+      router.push('/');
     }
 
     if (user) {

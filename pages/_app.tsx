@@ -6,11 +6,13 @@ import { store } from '../lib/redux/store';
 import { myChannelsSlice, myIssuesSlice } from '../lib/redux/reducers';
 import 'antd/dist/antd.css';
 import { getUserApi, checkToken } from '../services';
+import sockets from '../sockets';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
   const [state, setState] = useState('')
 
+  // sockets.init();
   const refreshGuard = async (accessToken: string) => {
     const response = await checkToken(accessToken, 'User').then(res => res.json());
     const user = await getUserApi(accessToken, response.id).then(res => res.json());
