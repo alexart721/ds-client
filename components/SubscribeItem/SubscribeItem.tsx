@@ -16,7 +16,7 @@ const SubscribeItem: FC<Props> = ({ channel, onCheck }) => {
   return (
   <>
     <div>
-      <Checkbox onChange={handleChange} value={channel}><div style={{fontSize:"large"}}>#{channel.name}</div></Checkbox>
+      <Checkbox onChange={handleChange} value={channel}><div style={{fontSize:"medium"}}># {channel.name}</div></Checkbox>
     </div>
   </>
   );

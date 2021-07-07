@@ -1,12 +1,19 @@
+.mostOuterDiv {
+  height: 93vh;
+  background-color: #d0e4f7;
+  margin: 0;
+  padding: 1rem;
+}
+
 .outerDiv {
   display: flex; 
   flex-direction: column; 
-  margin: 1.3rem 1.5rem;
+  margin: 0 1.5rem;
   padding: 0.4rem 0.8rem;
   max-height: 275px;
   overflow-y: scroll;
   border-radius: 8px; 
-  background-color: #65b7f3;
+  background-color: #e8f2fb;
   box-shadow: 2px 3px 4px #111d2c;
   font-family: 'Libre Caslon Text', serif;
 }
@@ -18,13 +25,13 @@
 .outerDiv1 {
   display: flex; 
   flex-direction: column; 
-  margin: 1.3rem 1.5rem 0.5rem;
+  margin: 1.3rem 1.5rem 0;
   padding: 0.4rem 0.8rem;
-  height: 425px;
-  max-height: 4250px;
+  height: 450px;
+  max-height: 450px;
   overflow-y: scroll;
-  border-radius: 8px; 
-  background-color: #65b7f3;
+  border-radius: 8px 8px 0 0; 
+  background-color: #e8f2fb;
   box-shadow: 2px 3px 4px #111d2c;
 }
 
@@ -39,18 +46,22 @@
 
 .details1 {
   margin-bottom: 0;
-  font-weight: bold;
+  font-size: medium;
+  color:#103456;
 }
 
 .details2 {
   margin-bottom: 0;
-  font-weight: normal;
+  font-size: small;
+  color:#103456;
 }
 
 .messageBar {
-  width: 700px;
-  margin-top: 1rem;
-  padding: 10px;
+  margin: 0 1.5rem;
+  background-color: #205383;
+  padding: 1.5rem 3rem;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 2px 3px 4px #111d2c;
 }
 
 .messageBarDiv {

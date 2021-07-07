@@ -87,14 +87,18 @@ console.log('Issue id when joining room:', issue._id);
   }
 
   return (
-    <>
-    <div className = {styles.outerDiv}>
-      <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-          <h2 style={{width:"fit-content", margin:"0"}}>{ issue.title } - {issue.priority}</h2>
-          { issue.createdAt && <h2 style={{margin:"0"}}>{moment(issue.createdAt).fromNow()}</h2>}
+    <div className={styles.mostOuterDiv}>
+      <div className = {styles.outerDiv}>
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+          {issue.priority === "Low" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"#C89933"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "Medium" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"orange"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "High" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"red"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "Low" && <h3 style={{marginBottom:"0.5rem", color:"#C89933"}}>{moment(issue.createdAt).fromNow()}</h3>}
+          {issue.priority === "Medium" && <h3 style={{marginBottom:"0.5rem", color:"orange"}}>{moment(issue.createdAt).fromNow()}</h3>}
+          {issue.priority === "High" && <h3 style={{marginBottom:"0.5rem", color:"red"}}>{moment(issue.createdAt).fromNow()}</h3>}
         </div>
-        <div>
-          {issue.issueOwnerName && <h3>{issue.issueOwnerName}</h3>}
+        <div style={{marginBottom:"0.5rem"}}>
+          {issue.issueOwnerName && <h3 style={{color:"#103456"}}>{issue.issueOwnerName}</h3>}
         </div>
         <div>
           {issue.issueDescription && <p>{issue.issueDescription}</p>}
@@ -128,9 +132,8 @@ console.log('Issue id when joining room:', issue._id);
           onSearch={onSubmit}
         />
       </div>
-
     </div>
-    </>
+    </div>
   );
 };
 
