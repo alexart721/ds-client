@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from '../lib/redux/store';
 import { myChannelsSlice, myIssuesSlice, userSlice, UserState } from '../lib/redux/reducers';
 import 'antd/dist/antd.css';
-import { getUserApi, checkToken } from '../services';
+import { getUserApi, checkToken, BASE_AUTH_URL, BASE_URL } from '../services';
 import sockets from '../sockets';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -14,8 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   // sockets.init();
   const refreshGuard = async (accessToken: string) => {
-    const response = await checkToken(accessToken, 'User').then(res => res.json());
-    const user = await getUserApi(accessToken, response.id).then(res => res.json());
+    const response = await checkToken(accessToken, 'User', BASE_AUTH_URL).then(res => res.json());
+    const user = await getUserApi(accessToken, response.id, BASE_URL).then(res => res.json());
     const setUserState: UserState = {
       id: user._id || '',
       firstName: user.firstName,

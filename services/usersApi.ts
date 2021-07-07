@@ -1,7 +1,7 @@
-import { BASE_URL, BASE_AUTH_URL } from '.';
+import { BASE_URL_SERVER_SIDE, BASE_AUTH_URL_SERVER_SIDE } from '.';
 
-export const getUserApi = (accessToken: string, userId: string): Promise<Response> => {
-  return fetch(BASE_URL + `/users/${userId}`, {
+export const getUserApi = (accessToken: string, userId: string, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
+  return fetch(url + `/users/${userId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -10,8 +10,8 @@ export const getUserApi = (accessToken: string, userId: string): Promise<Respons
   });
 };
 
-export const checkToken = (token: string, roles: string): Promise<Response> => {
-  return fetch(BASE_AUTH_URL + '/checkAccess', {
+export const checkToken = (token: string, roles: string, url: string = BASE_AUTH_URL_SERVER_SIDE): Promise<Response> => {
+  return fetch(url + '/checkAccess', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -21,9 +21,9 @@ export const checkToken = (token: string, roles: string): Promise<Response> => {
   });
 };
 
-export const logoutUser = (): Promise<Response> => {
+export const logoutUser = (url: string = BASE_AUTH_URL_SERVER_SIDE): Promise<Response> => {
   let token = localStorage.getItem('accessToken');
-  return fetch(BASE_AUTH_URL + '/logout', {
+  return fetch(url + '/logout', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
