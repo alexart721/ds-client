@@ -20,3 +20,14 @@ export const checkToken = (token: string, roles: string, url: string = BASE_AUTH
     body: JSON.stringify({ roles }),
   });
 };
+
+export const logoutUser = (url: string = BASE_AUTH_URL_SERVER_SIDE): Promise<Response> => {
+  let token = localStorage.getItem('accessToken');
+  return fetch(url + '/logout', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer: ${token}`
+    },
+  });
+};

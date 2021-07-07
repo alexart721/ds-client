@@ -4,20 +4,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { addChannelsToUserApi, BASE_URL, removeChannelFromUserApi } from '../../../services';
 import _ from 'lodash';
 
-// const initialState: MyChannelState[] = [
-//   {
-//     id: '1',
-//     name: 'vascular'
-//   },
-//   {
-//     id: '2',
-//     name: 'cardiology'
-//   },
-//   {
-//     id: '3',
-//     name: 'hemotology'
-//   },
-// ];
 const initialState: MyChannelState[] = [];
 
 // For admin: add channel

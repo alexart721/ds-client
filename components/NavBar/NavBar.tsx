@@ -4,11 +4,15 @@ import styles from './NavBar.module.css';
 
 const { Header } = Layout;
 
-const NavBar = () => {
+interface Props {
+  userName: string
+}
+
+const NavBar: React.FC<Props> = ({userName}) => {
 
   return (
-    <div>
-      <Header className={styles.sitePageHeader}>Welcome Alex</Header>
+    <div className={styles.navBarDiv}>
+      <Header className={styles.sitePageHeader}>Welcome {userName}</Header>
     </div>
   );
 };

@@ -3,11 +3,12 @@
   flex-direction: column; 
   margin: 1.3rem 1.5rem;
   padding: 0.4rem 0.8rem;
-  max-height: 300px;
+  max-height: 275px;
   overflow-y: scroll;
   border-radius: 8px; 
   background-color: #65b7f3;
   box-shadow: 2px 3px 4px #111d2c;
+  font-family: 'Libre Caslon Text', serif;
 }
 
 .outerDiv::-webkit-scrollbar {
@@ -19,8 +20,8 @@
   flex-direction: column; 
   margin: 1.3rem 1.5rem 0.5rem;
   padding: 0.4rem 0.8rem;
-  height: 450px;
-  max-height: 450px;
+  height: 425px;
+  max-height: 4250px;
   overflow-y: scroll;
   border-radius: 8px; 
   background-color: #65b7f3;
@@ -48,6 +49,7 @@
 
 .messageBar {
   width: 700px;
+  margin-top: 1rem;
   padding: 10px;
 }
 
