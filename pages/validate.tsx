@@ -27,7 +27,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const response = await checkToken(accessToken, roles).then(res => res.json());
     if (response.message === 'Approved') {
       user = await getUserApi(accessToken, response.id).then(res => {
-        console.log(res.status);
         return res.json();
       });
 

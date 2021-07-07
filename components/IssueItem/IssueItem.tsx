@@ -21,8 +21,6 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
     setState(!state);
   }
 
-  console.log(`"${BASE_URL}${issue.imageUrl}"`);
-
   return (
     <div className = {styles.outerDiv}>
       {!state ? <div>

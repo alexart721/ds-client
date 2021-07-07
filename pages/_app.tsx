@@ -6,7 +6,6 @@ import { store } from '../lib/redux/store';
 import { myChannelsSlice, myIssuesSlice, userSlice, UserState } from '../lib/redux/reducers';
 import 'antd/dist/antd.css';
 import { getUserApi, checkToken, BASE_AUTH_URL, BASE_URL } from '../services';
-import sockets from '../sockets';
 
 function MyApp({ Component, pageProps }: AppProps) {
 

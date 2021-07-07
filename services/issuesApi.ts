@@ -1,4 +1,4 @@
-import { BASE_AUTH_URL, BASE_URL, BASE_URL_SERVER_SIDE } from '.';
+import { BASE_URL_SERVER_SIDE } from '.';
 import { Issue } from '../types';
 
 export const getChannelIssuesApi = (channelId: string, url: string = BASE_URL_SERVER_SIDE): Promise<Response> => {
@@ -37,7 +37,6 @@ export const addIssueToChannelApi = (newIssue: Issue, channelId: string, url: st
   formData.append('bloodPressure',newIssue.patientVitals.bloodPressure);
   if (newIssue.issueDescription) formData.append('issueDescription',newIssue.issueDescription);
   if (newIssue.imageFile) formData.append('image', newIssue.imageFile.file.originFileObj);
-  console.log(newIssue.imageUrl);
   return fetch (url + `/channels/${channelId}/issues`, {
     method: 'POST',
     // mode: 'no-cors',

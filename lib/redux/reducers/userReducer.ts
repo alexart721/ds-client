@@ -1,7 +1,5 @@
 import { UserState } from './stateTypes';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import * as issuesApi from '../../../services/issuesApi';
-import { Issue, IssueWithChannelId, User } from '../../../types';
+import { createSlice } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
 const initialState: UserState = {
