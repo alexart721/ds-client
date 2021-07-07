@@ -1,6 +1,7 @@
 import { MyChannelState, MyIssueState } from '../lib/redux/reducers';
 
 export interface User {
+  _id?: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -21,7 +22,8 @@ export interface FieldData {
 }
 
 export interface MessageData {
-  messageOwner: string;
+  messageOwnerId: string;
+  messageOwnerName: string;
   content: string;
 }
 

@@ -41,11 +41,13 @@ export const myIssuesSlice = createSlice({
   initialState,
   reducers: {
     addIssue(state, action) {
-      return state.concat(action.payload);
+      const stateIssueIds = state.map((issue: MyIssueState) => issue.id);
+      const newIssues = action.payload.filter((issue: MyIssueState) => !stateIssueIds.includes(issue.id));
+      return state.concat(newIssues);
     },
     closeIssue(state, action) {
       const sansRemovedIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
-      state.filter(issue => sansRemovedIssueIds.includes(issue.id));
+      return state.filter(issue => sansRemovedIssueIds.includes(issue.id));
     }
   },
   extraReducers: (builder) => {
@@ -55,7 +57,7 @@ export const myIssuesSlice = createSlice({
     })
     .addCase(closeIssue.fulfilled, (state, action) => {
       const sansRemovedIssueIds = action.payload.map((issue: MyIssueState) => issue.id);
-      state.filter(issue => sansRemovedIssueIds.includes(issue.id));
+      return state.filter(issue => sansRemovedIssueIds.includes(issue.id));
     })
   }
 });

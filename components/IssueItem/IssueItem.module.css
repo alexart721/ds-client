@@ -4,8 +4,8 @@
   margin: 1.3rem 1.5rem;
   padding: 0.4rem 0.8rem;
   border-radius: 8px; 
-  background-color: #65b7f3;
-  box-shadow: 2px 3px 4px #111d2c;
+  background-color: #e8f2fb;
+  box-shadow: 2px 3px 4px #111d2c54;
   transition: 0.4s ease;
   font-family: 'Libre Caslon Text', serif;
 }
@@ -20,10 +20,12 @@
 
 .details1 {
   margin-bottom: 0;
-  font-weight: bold;
+  font-size: medium;
+  color:#103456;
 }
 
 .details2 {
   margin-bottom: 0;
-  font-weight: normal;
+  font-size: small;
+  color:#103456;
 }
