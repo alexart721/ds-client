@@ -23,28 +23,36 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
   return (
     <div className = {styles.outerDiv}>
       {!state ? <div>
-        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-          <h2 style={{width:"fit-content", margin:"0"}}>{ issue.title } - Prority {issue.priority}</h2>
-          <h2 style={{margin:"0"}}>{moment(issue.createdAt).fromNow()}</h2>
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", alignItems:"center"}}>
+          {issue.priority === "Low" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"#C89933"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "Medium" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"orange"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "High" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"red"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "Low" && <h3 style={{marginBottom:"0.5rem", color:"#C89933"}}>{moment(issue.createdAt).fromNow()}</h3>}
+          {issue.priority === "Medium" && <h3 style={{marginBottom:"0.5rem", color:"orange"}}>{moment(issue.createdAt).fromNow()}</h3>}
+          {issue.priority === "High" && <h3 style={{marginBottom:"0.5rem", color:"red"}}>{moment(issue.createdAt).fromNow()}</h3>}
         </div>
         <div>
-          <h3>{issue.issueOwnerName}</h3>
+          <h3 style={{color:"#103456"}}>{issue.issueOwnerName}</h3>
         </div>
         <div>
-          <p style={{marginBottom:"0"}}>{issue.issueDescription}</p>
-          <Button type="link" className={styles.antBtn} onClick={clickHandler}><span style={{color:"#001529"}}>See more details...</span></Button>
+          <p style={{marginBottom:"0", color:"#103456"}}>{issue.issueDescription}</p>
+          <Button type="link" className={styles.antBtn} onClick={clickHandler}><span style={{color:"#4091DD"}}>See more details...</span></Button>
         </div>
       </div> :
       <div>
-        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-          <h2 style={{width:"fit-content", margin:"0"}}>{ issue.title } - Prority {issue.priority}</h2>
-          <h2 style={{margin:"0"}}>{moment(issue.createdAt).fromNow()}</h2>
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", alignItems:"center"}}>
+          {issue.priority === "Low" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"#C89933"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "Medium" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"orange"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "High" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"red"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "Low" && <h3 style={{marginBottom:"0.5rem", color:"#C89933"}}>{moment(issue.createdAt).fromNow()}</h3>}
+          {issue.priority === "Medium" && <h3 style={{marginBottom:"0.5rem", color:"orange"}}>{moment(issue.createdAt).fromNow()}</h3>}
+          {issue.priority === "High" && <h3 style={{marginBottom:"0.5rem", color:"red"}}>{moment(issue.createdAt).fromNow()}</h3>}
         </div>
         <div>
-          <h3>{issue.issueOwnerName}</h3>
+          <h3 style={{color:"#103456"}}>{issue.issueOwnerName}</h3>
         </div>
         <div>
-          <p>{issue.issueDescription}</p>
+          <p style={{color:"#103456"}}>{issue.issueDescription}</p>
           <p className={styles.details1}>Age: <span className={styles.details2}>{issue.patientAge}</span></p>
           <p className={styles.details1}>Gender: <span className={styles.details2}>{issue.patientGender}</span></p>
           <p className={styles.details1}>Medical Issues: <span className={styles.details2}>{issue.patientMedicalIssues}</span></p>

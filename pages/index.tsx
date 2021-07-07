@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link'
 import { Button } from 'antd';
 import SideBar from '../components/SideBar/SideBar';
@@ -12,7 +12,7 @@ const Home: React.FC<Props> = ({userName}) => {
 
   return (
     <div style={{display:"flex", flexDirection:"row", 
-          backgroundColor:"rgba(228, 253, 248, 0.75)", fontFamily: "'Libre Caslon Text', serif"}}>
+          backgroundColor:"#d0e4f7", color:"#103456", fontFamily: "'Libre Caslon Text', serif"}}>
       <SideBar />
       <div style={{display:"flex", flexDirection:"column"}}>
         <NavBar userName={userName}/>

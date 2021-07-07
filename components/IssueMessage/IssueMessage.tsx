@@ -23,6 +23,7 @@ const SendIcon = (<SendOutlined
 const IssueMessage: FC<Props>  = ({ issue }) => {
   const [messageTest, setMessageTest] = useState('');
   const socket = sockets.init();
+
   socket.on('connection', () => {
     socket.emit('join_room', `${issue}`);
   });
@@ -31,21 +32,25 @@ const IssueMessage: FC<Props>  = ({ issue }) => {
 
     setMessageTest(message);
   });
+
   const onSubmit = async (values: string) => {
     console.log(values);
-
     socket.emit('message', { room: `${issue}`, message: `${values}` });
   }
 
   return (
-    <>
-    <div className = {styles.outerDiv}>
-      <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-          <h2 style={{width:"fit-content", margin:"0"}}>{ issue.title } - {issue.priority}</h2>
-          { issue.createdAt && <h2 style={{margin:"0"}}>{moment(issue.createdAt).fromNow()}</h2>}
+    <div className={styles.mostOuterDiv}>
+      <div className = {styles.outerDiv}>
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+          {issue.priority === "Low" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"#C89933"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "Medium" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"orange"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "High" && <h2 style={{width:"fit-content", marginBottom:"0.5rem", color:"red"}}>{ issue.title } - Prority {issue.priority}</h2>}
+          {issue.priority === "Low" && <h3 style={{marginBottom:"0.5rem", color:"#C89933"}}>{moment(issue.createdAt).fromNow()}</h3>}
+          {issue.priority === "Medium" && <h3 style={{marginBottom:"0.5rem", color:"orange"}}>{moment(issue.createdAt).fromNow()}</h3>}
+          {issue.priority === "High" && <h3 style={{marginBottom:"0.5rem", color:"red"}}>{moment(issue.createdAt).fromNow()}</h3>}
         </div>
-        <div>
-          {issue.issueOwnerName && <h3>{issue.issueOwnerName}</h3>}
+        <div style={{marginBottom:"0.5rem"}}>
+          {issue.issueOwnerName && <h3 style={{color:"#103456"}}>{issue.issueOwnerName}</h3>}
         </div>
         <div>
           {issue.issueDescription && <p>{issue.issueDescription}</p>}
@@ -53,16 +58,10 @@ const IssueMessage: FC<Props>  = ({ issue }) => {
           <p className={styles.details1}>Gender: <span className={styles.details2}>{issue.patientGender}</span></p>
           <p className={styles.details1}>Medical Issues: <span className={styles.details2}>{issue.patientMedicalIssues}</span></p>
           <p className={styles.details1}>Medication: <span className={styles.details2}>{issue.patientMedications}</span></p>
-          {issue.patientVitals.temperature !=='undefined' && 
-            issue.patientVitals.bloodPressure !== 'undefined' && 
-            issue.patientVitals.heartRate !== 'undefined' &&
-            <p className={styles.details1}>Vitals:</p>}
-          { issue.patientVitals.temperature !=='undefined' && 
-            issue.patientVitals.bloodPressure !== 'undefined' && 
-            issue.patientVitals.heartRate !== 'undefined' &&
-            <p className={styles.details2}>&emsp;&emsp;&emsp;Temp: {issue.patientVitals.temperature}F, BP: {issue.patientVitals.bloodPressure}, HR: {issue.patientVitals.heartRate} bpm</p>}
+          <p className={styles.details1}>Vitals:</p>
+          <p className={styles.details2}>&emsp;&emsp;&emsp;Temp: {issue.patientVitals.temperature}F, BP: {issue.patientVitals.bloodPressure}, HR: {issue.patientVitals.heartRate} bpm</p>
           <p className={styles.details1}>Picture:</p>
-          &emsp;&emsp;&emsp;<img style={{height:"200px", width:"200px"}} src="https://advancedtissue.com/wp-content/uploads/cut-finger.jpg"/><br/><br/>
+          &emsp;&emsp;&emsp;<img style={{height:"200px", width:"200px"}} src="https://advancedtissue.com/wp-content/uploads/cut-finger.jpg"/><br/>
         </div>
     </div>
     <div>
@@ -78,9 +77,8 @@ const IssueMessage: FC<Props>  = ({ issue }) => {
           onSearch={onSubmit}
         />
       </div>
-      
     </div>
-    </>
+    </div>
   );
 };
 
