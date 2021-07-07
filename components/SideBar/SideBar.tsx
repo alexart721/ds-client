@@ -1,23 +1,35 @@
 import { useSelector } from '../../lib/hooks/useTypedSelector';
+import { useRouter } from 'next/router';
 import { Menu } from 'antd';
 import Link from 'next/link';
 import ChannelItem from '../ChannelItem/ChannelItem';
 import MyIssueItem from '../MyIssueItem/MyIssueItem';
+import { logoutUser } from '../../services';
 
 const SideBar = () => {
+  const router = useRouter();
   const channels = useSelector((state) => state.channels);
   const issues = useSelector((state) => state.issues);
   const submenuKeys: string[] = ['channelsSub', 'issuesSub'];
-  const submenuTitles: string[] = ['Channels', 'My Issues'];
+  const submenuTitles: string[] = ['Channels', 'My Issues', 'Menu'];
+
+  const handleLogout = async () => {
+    const logout = confirm('Are you sure you want to logout now?');
+    if (logout) {
+      await logoutUser();
+      localStorage.removeItem('accessToken');
+      router.push('http://localhost:3001/');
+    }
+  };
 
   return (
-    <div style={{ width: "14vw", height: "100vh", background: "#001529" } }>
+    <div style={{ width: "14vw", height: "100vh", background: "#001529", fontFamily:"'Libre Caslon Text', serif" } }>
       <Menu
         defaultOpenKeys={submenuKeys}
         mode="inline"
         theme="dark"
       >
-        <Menu.SubMenu key={submenuKeys[0]} title={submenuTitles[0]} >
+        <Menu.SubMenu key={submenuKeys[0]} title={submenuTitles[0]}>
           {channels && channels.map(channel => (
               <Menu.Item key={channel.id}>
                 <Link href="/channel/[channel]" as={`/channel/${channel.name}`}>
@@ -36,7 +48,7 @@ const SideBar = () => {
           {issues && issues.map(issue => {
             return (
               <Menu.Item key={issue.id}>
-                <Link href="/channel/[channel]/[issue]" as={`/channel/${issue.channelName}/${issue.title}`}>
+                <Link href="/channel/[channel]/[issue]" as={`/channel/${issue.channelName}/${issue.id}`}>
                   <a>
                     <MyIssueItem
                       issue={issue}
@@ -46,6 +58,14 @@ const SideBar = () => {
               </Menu.Item>
             )
           })}
+        </Menu.SubMenu>
+        <Menu.SubMenu key='menu' title={submenuTitles[2]} >
+          <Menu.Item >
+            <Link href='/'><a>Home</a></Link>
+          </Menu.Item>
+          <Menu.Item >
+            <div onClick={handleLogout}>Logout</div>
+          </Menu.Item>
         </Menu.SubMenu>
       </Menu>
     </div>

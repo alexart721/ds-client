@@ -5,13 +5,15 @@ let socket: any;
 
 function init() {
   console.log('init');
-  socket = socketClient('http://172.31.34.163', { path: '/api/socket.io' });
+  socket = socketClient('http://localhost:4000');
   socket.on('connection', () => {
     console.log('Connected to socketIO backend');
   });
   socket.on('test', (data: any) => {
     console.log('Message received', data);
   })
+
+  return socket;
 }
 
 
