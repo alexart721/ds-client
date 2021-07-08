@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { MyChannelState } from '../../lib/redux/reducers';
+import { MyChannelState } from '../../lib/types';
 
 interface Props {
   channel: MyChannelState,
@@ -7,7 +7,10 @@ interface Props {
 
 const ChannelItem: FC<Props> = ({ channel }) => (
   <div>
-    <label htmlFor="channel"># { channel.name }</label>
+    <label htmlFor="channel">
+      #
+      { channel.name }
+    </label>
   </div>
 );
 

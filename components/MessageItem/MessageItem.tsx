@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { MessageData } from '../../types';
+import { MessageData } from '../../lib/types';
 
+<<<<<<< HEAD
 const MessageItem: FC<{message: MessageData}> = ({ message }) => {
   return (
     <div>
@@ -9,5 +10,13 @@ const MessageItem: FC<{message: MessageData}> = ({ message }) => {
     </div>
   )
 }
+=======
+const MessageItem: FC<{ message: MessageData }> = ({ message }) => (
+  <>
+    <div>{message.messageOwnerName}</div>
+    <div>{message.content}</div>
+  </>
+);
+>>>>>>> main
 
 export default MessageItem;

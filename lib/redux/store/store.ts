@@ -7,7 +7,7 @@ export const store = configureStore({
     issues: myIssuesSlice.reducer,
     user: userSlice.reducer,
     socket: socketSlice.reducer,
-  }
+  },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
