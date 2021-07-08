@@ -13,10 +13,7 @@ import { UserState } from '../lib/types';
 const NEXT_PUBLIC_BASE_AUTH_URL = process.env.NEXT_PUBLIC_BASE_AUTH_URL;
 const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-<<<<<<< HEAD
-=======
 function MyApp({ Component, pageProps }: AppProps) {
->>>>>>> main
   const [state, setState] = useState('');
 
   // sockets.init();
