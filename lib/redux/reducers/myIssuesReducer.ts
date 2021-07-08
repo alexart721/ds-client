@@ -33,7 +33,8 @@ export const closeIssue = createAsyncThunk(
     const { channelId } = closingIssueWithChannel;
     const closingIssue = _.omit(closingIssueWithChannel, ['channelId']);
     await issuesApi.closeIssueApi(closingIssue, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
-    await issuesApi.archiveIssueApi(closingIssue, channelId, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
+    await issuesApi
+      .archiveIssueApi(closingIssue, channelId, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
     const userWithoutIssue: User = await issuesApi
       .updateUserIssueMetaApi(closingIssue).then((res) => res.json());
     return userWithoutIssue.issueMeta;

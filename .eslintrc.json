@@ -31,6 +31,8 @@
         "object-curly-newline": "off",
         "import/prefer-default-export": "off",
         "jsx-a11y/anchor-is-valid": "off",
+        "prefer-destructuring": "off",
+        "@next/next/no-img-element": "off",
         "import/extensions": [
             "error",
             "ignorePackages",
