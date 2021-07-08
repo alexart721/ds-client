@@ -68,24 +68,13 @@ const Validate: React.FC<{ user: User, accessToken: string }> = ({ user, accessT
   }, []);
 
   return (
-<<<<<<< HEAD
-    <div style={{display:"flex",
-          flexDirection:"row",
-          justifyContent:"center",
-          alignItems:"center",
-          height:"100vh",
-          backgroundColor:"#D0E4F7",
-          fontFamily:"'Libre Caslon Text', serif"}}>
-=======
     <div style={{ display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
       height: '100vh',
-      backgroundColor: 'rgba(228, 253, 248, 0.75)',
-      fontFamily: "'Libre Caslon Text', serif" }}
+      backgroundColor: '#D0E4F7' }}
     >
->>>>>>> main
       <Spin
         tip="Validating Credentials..."
         size="large"

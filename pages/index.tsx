@@ -12,8 +12,7 @@ const Home: React.FC<Props> = ({ userName }) => (
   <div style={{ display: 'flex',
     flexDirection: 'row',
     backgroundColor: '#d0e4f7',
-    color: '#103456',
-    fontFamily: "'Libre Caslon Text', serif" }}
+    color: '#103456' }}
   >
     <SideBar />
     <div style={{ display: 'flex', flexDirection: 'column' }}>

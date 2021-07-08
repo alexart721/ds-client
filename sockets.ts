@@ -12,14 +12,8 @@ function init() {
   return socket;
 }
 
-<<<<<<< HEAD
-export default {
-  init, socket
-};
-=======
 const exportValue = {
   init, socket,
 };
 
 export default exportValue;
->>>>>>> main
