@@ -1,9 +1,10 @@
+/* eslint-disable prefer-destructuring */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import _ from 'lodash';
 import * as issuesApi from '../../../services/issuesApi';
 import { Issue, IssueWithChannelId, User, MyIssueState } from '../../types';
 
-const { BASE_URL } = process.env;
+const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const initialState: MyIssueState[] = [];
 
@@ -13,7 +14,7 @@ export const addIssueToChannel = createAsyncThunk<MyIssueState | null, IssueWith
     const { channelId } = issueWithChannel;
     const issue = _.omit(issueWithChannel, ['channelId']);
     const newIssue: Issue = await issuesApi
-      .addIssueToChannelApi(issue, channelId, BASE_URL).then((res) => res.json());
+      .addIssueToChannelApi(issue, channelId, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
     let newIssueState: MyIssueState | null = null;
     if (newIssue) {
       newIssueState = {
@@ -31,8 +32,8 @@ export const closeIssue = createAsyncThunk(
   async (closingIssueWithChannel: IssueWithChannelId) => {
     const { channelId } = closingIssueWithChannel;
     const closingIssue = _.omit(closingIssueWithChannel, ['channelId']);
-    await issuesApi.closeIssueApi(closingIssue, BASE_URL).then((res) => res.json());
-    await issuesApi.archiveIssueApi(closingIssue, channelId, BASE_URL).then((res) => res.json());
+    await issuesApi.closeIssueApi(closingIssue, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
+    await issuesApi.archiveIssueApi(closingIssue, channelId, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
     const userWithoutIssue: User = await issuesApi
       .updateUserIssueMetaApi(closingIssue).then((res) => res.json());
     return userWithoutIssue.issueMeta;

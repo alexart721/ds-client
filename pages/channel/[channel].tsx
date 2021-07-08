@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from '../../lib/hooks/useTypedSelector';
@@ -9,7 +10,7 @@ import { store } from '../../lib/redux/store';
 import { Issue } from '../../lib/types';
 import styles from '../../styles/ChannelIssues.module.css';
 
-const { BASE_URL } = process.env;
+const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const initialChannelIssues: Issue[] = [];
 
@@ -20,7 +21,7 @@ const ChannelIssues = () => {
   const [channelIssues, setChannelIssues] = useState(initialChannelIssues);
 
   const fetchIssues = async (channelId: string) => {
-    const newChannelIssues = await getChannelIssuesApi(channelId, BASE_URL)
+    const newChannelIssues = await getChannelIssuesApi(channelId, NEXT_PUBLIC_BASE_URL)
       .then((res) => res.json());
     setChannelIssues(newChannelIssues);
   };

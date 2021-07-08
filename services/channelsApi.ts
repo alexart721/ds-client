@@ -1,9 +1,10 @@
+/* eslint-disable prefer-destructuring */
 import { MyChannelState } from '../lib/types';
 
-const { BASE_URL_SERVER_SIDE } = process.env;
+const NEXT_PUBLIC_BASE_URL_SERVER_SIDE = process.env.NEXT_PUBLIC_BASE_URL_SERVER_SIDE;
 
 export const addChannelsToUserApi = (newChannels: MyChannelState[],
-  url: string = BASE_URL_SERVER_SIDE as string): Promise<Response> => {
+  url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string): Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${url}/users/channels/add`, {
     method: 'PUT',
@@ -16,7 +17,7 @@ export const addChannelsToUserApi = (newChannels: MyChannelState[],
 };
 
 export const removeChannelFromUserApi = (removeChannel: MyChannelState,
-  url: string = BASE_URL_SERVER_SIDE as string): Promise<Response> => {
+  url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string): Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${url}/users/channels/:id`, {
     method: 'DELETE',
@@ -28,7 +29,7 @@ export const removeChannelFromUserApi = (removeChannel: MyChannelState,
   });
 };
 
-export const getSubscribeChannels = (url: string = BASE_URL_SERVER_SIDE as string)
+export const getSubscribeChannels = (url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string)
 : Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${url}/channels`, {

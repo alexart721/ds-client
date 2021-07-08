@@ -6,7 +6,8 @@ import Image from 'next/image';
 import styles from './IssueItem.module.css';
 import { Issue } from '../../lib/types';
 
-const { BASE_URL } = process.env;
+// eslint-disable-next-line prefer-destructuring
+const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface Props {
   issue: Issue,
@@ -134,7 +135,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
               <>
                 <p className={styles.details1}>Picture:</p>
             &emsp;&emsp;&emsp;
-                <Image height="200px" width="200px" src={`${BASE_URL}${issue.imageUrl}`} alt="Not found" />
+                <img style={{height: '200px', width: '200px'}} src={`${NEXT_PUBLIC_BASE_URL}${issue.imageUrl}`} alt="Not found" />
                 <br />
                 <br />
               </>

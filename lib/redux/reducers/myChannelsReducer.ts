@@ -1,8 +1,9 @@
+/* eslint-disable prefer-destructuring */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { User, MyChannelState } from '../../types';
 import { addChannelsToUserApi, removeChannelFromUserApi } from '../../../services';
 
-const { BASE_URL } = process.env;
+const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const initialState: MyChannelState[] = [];
 
@@ -11,7 +12,7 @@ const initialState: MyChannelState[] = [];
 export const addChannelsToUser = createAsyncThunk<MyChannelState[], MyChannelState[]>(
   'channels/addToUser',
   async (channels: MyChannelState[]) => {
-    const channelsAdded: User = await addChannelsToUserApi(channels, BASE_URL)
+    const channelsAdded: User = await addChannelsToUserApi(channels, NEXT_PUBLIC_BASE_URL)
       .then((res) => res.json());
     return channelsAdded.channels;
   },
@@ -20,7 +21,7 @@ export const addChannelsToUser = createAsyncThunk<MyChannelState[], MyChannelSta
 export const removeChannelFromUser = createAsyncThunk<MyChannelState[], MyChannelState>(
   'channels/removeFromUser',
   async (channel: MyChannelState) => {
-    const channelsRemoved: User = await removeChannelFromUserApi(channel, BASE_URL)
+    const channelsRemoved: User = await removeChannelFromUserApi(channel, NEXT_PUBLIC_BASE_URL)
       .then((res) => res.json());
     return channelsRemoved.channels;
   },

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import React, { useEffect, useState } from 'react';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
@@ -9,15 +10,16 @@ import { checkToken } from '../services';
 import { getUserApi } from '../services/usersApi';
 import { UserState } from '../lib/types';
 
-const { BASE_AUTH_URL, BASE_URL } = process.env;
+const NEXT_PUBLIC_BASE_AUTH_URL = process.env.NEXT_PUBLIC_BASE_AUTH_URL;
+const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [state, setState] = useState('');
 
   // sockets.init();
   const refreshGuard = async (accessToken: string) => {
-    const response = await checkToken(accessToken, 'User', BASE_AUTH_URL).then((res) => res.json());
-    const user = await getUserApi(accessToken, response.id, BASE_URL).then((res) => res.json());
+    const response = await checkToken(accessToken, 'User', NEXT_PUBLIC_BASE_AUTH_URL).then((res) => res.json());
+    const user = await getUserApi(accessToken, response.id, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
     const setUserState: UserState = {
       id: user._id || '',
       firstName: user.firstName,

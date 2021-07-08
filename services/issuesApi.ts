@@ -1,9 +1,10 @@
+/* eslint-disable prefer-destructuring */
 import { Issue } from '../lib/types';
 
-const { BASE_URL_SERVER_SIDE } = process.env;
+const NEXT_PUBLIC_BASE_URL_SERVER_SIDE = process.env.NEXT_PUBLIC_BASE_URL_SERVER_SIDE;
 
 export const getChannelIssuesApi = (channelId: string,
-  url: string = BASE_URL_SERVER_SIDE as string): Promise<Response> => {
+  url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string): Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${url}/channels/${channelId}/issues`, {
     method: 'GET',
@@ -15,7 +16,7 @@ export const getChannelIssuesApi = (channelId: string,
 };
 
 export const getIssueByIdApi = (issueId: string,
-  url: string = BASE_URL_SERVER_SIDE as string): Promise<Response> => {
+  url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string): Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${url}/issues/${issueId}`, {
     method: 'GET',
@@ -27,7 +28,7 @@ export const getIssueByIdApi = (issueId: string,
 };
 
 export const addIssueToChannelApi = (newIssue: Issue, channelId: string,
-  url: string = BASE_URL_SERVER_SIDE as string): Promise<Response> => {
+  url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string): Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   const formData = new FormData();
   formData.append('title', newIssue.title);
@@ -52,7 +53,7 @@ export const addIssueToChannelApi = (newIssue: Issue, channelId: string,
 };
 
 export const addIssueToUserApi = (newIssue: Issue,
-  url: string = BASE_URL_SERVER_SIDE as string): Promise<Response> => {
+  url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string): Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${url}/users/issues/add`, {
     method: 'PUT',
@@ -65,7 +66,7 @@ export const addIssueToUserApi = (newIssue: Issue,
 };
 
 export const closeIssueApi = (closedIssue: Issue,
-  url: string = BASE_URL_SERVER_SIDE as string): Promise<Response> => {
+  url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string): Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${url}/issues/${closedIssue._id}/resolve`, {
     method: 'PUT',
@@ -78,7 +79,7 @@ export const closeIssueApi = (closedIssue: Issue,
 };
 
 export const archiveIssueApi = (archivedIssue: Issue,
-  channelId: string, url: string = BASE_URL_SERVER_SIDE as string): Promise<Response> => {
+  channelId: string, url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string): Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${url}/channels/${channelId}/issues`, {
     method: 'PUT',
@@ -91,7 +92,7 @@ export const archiveIssueApi = (archivedIssue: Issue,
 };
 
 export const updateUserIssueMetaApi = (issueToRemove: Issue,
-  url: string = BASE_URL_SERVER_SIDE as string): Promise<Response> => {
+  url: string = NEXT_PUBLIC_BASE_URL_SERVER_SIDE as string): Promise<Response> => {
   const token = localStorage.getItem('accessToken');
   return fetch(`${url}/users/issues/remove`, {
     method: 'PUT',

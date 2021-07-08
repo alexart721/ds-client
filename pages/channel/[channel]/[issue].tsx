@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import SideBar from '../../../components/SideBar/SideBar';
@@ -7,7 +8,7 @@ import { getIssueByIdApi } from '../../../services';
 import { Issue } from '../../../lib/types';
 import styles from '../../../styles/ChannelIssue.module.css';
 
-const { BASE_URL } = process.env;
+const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const initialState: Issue = {
   title: '',
@@ -32,7 +33,7 @@ const ChannelIssue = () => {
   const { channel } = router.query as { channel: string };
   const [singleIssue, setSingleIssue] = useState(initialState);
   const getIssuebyId = async (issue: string) => {
-    const issueData: Issue = await getIssueByIdApi(issue, BASE_URL).then((res) => res.json());
+    const issueData: Issue = await getIssueByIdApi(issue, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
     setSingleIssue(issueData);
   };
 

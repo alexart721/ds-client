@@ -11,6 +11,8 @@ import { store } from '../lib/redux/store';
 const initialChannels: MyChannelState[] = [];
 const initialChosenChannels: MyChannelState[] = [];
 
+const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 interface Props {
   userName: string,
 }
@@ -20,7 +22,7 @@ const SubscribeChannel: React.FC<Props> = ({ userName }) => {
   const [chosenChannels, setChosenChannels] = useState(initialChosenChannels);
 
   const getChannels = async () => {
-    let subscribeChannels = await getSubscribeChannels().then((res) => res.json());
+    let subscribeChannels = await getSubscribeChannels(NEXT_PUBLIC_BASE_URL).then((res) => res.json());
     subscribeChannels = subscribeChannels
       .map((channel: Channel) => ({ id: channel._id, name: channel.name }));
     const currentChannels = store.getState().channels;
