@@ -9,7 +9,7 @@ import { getUserApi, checkToken, BASE_AUTH_URL, BASE_URL } from '../services';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
-  const [state, setState] = useState('')
+  const [state, setState] = useState('');
 
   // sockets.init();
   const refreshGuard = async (accessToken: string) => {
