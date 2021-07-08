@@ -73,8 +73,7 @@ const Validate: React.FC<{ user: User, accessToken: string }> = ({ user, accessT
       justifyContent: 'center',
       alignItems: 'center',
       height: '100vh',
-      backgroundColor: 'rgba(228, 253, 248, 0.75)',
-      fontFamily: "'Libre Caslon Text', serif" }}
+      backgroundColor: '#D0E4F7' }}
     >
       <Spin
         tip="Validating Credentials..."

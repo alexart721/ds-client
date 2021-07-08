@@ -62,7 +62,6 @@ const SubscribeChannel: React.FC<Props> = ({ userName }) => {
   return (
     <div style={{ display: 'flex',
       flexDirection: 'row',
-      fontFamily: "'Libre Caslon Text', serif",
       backgroundColor: '#d0e4f7',
       color: '#103456' }}
     >

@@ -22,7 +22,7 @@ const SideBar = () => {
   };
 
   return (
-    <div style={{ width: '14vw', height: '100vh', background: '#001529', fontFamily: "'Libre Caslon Text', serif" }}>
+    <div style={{ width: '14vw', height: '100vh', background: '#001529' }}>
       <Menu
         defaultOpenKeys={submenuKeys}
         mode="inline"
