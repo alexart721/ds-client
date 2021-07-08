@@ -1,5 +1,5 @@
-export * from './stateTypes';
-export * from './myChannelsReducer';
-export * from './myIssuesReducer';
-export * from './userReducer';
-export * from './socketReducer';
+// export * from '../../../types/stateTypes';
+export { addChannelsToUser, myChannelsSlice, removeChannelFromUser } from './myChannelsReducer';
+export { addIssueToChannel, closeIssue, myIssuesSlice } from './myIssuesReducer';
+export { userSlice } from './userReducer';
+export { socketSlice } from './socketReducer';

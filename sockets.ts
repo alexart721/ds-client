@@ -1,21 +1,19 @@
 import socketClient from 'socket.io-client';
-import { BASE_CLIENT_URL_SOCKET } from './services';
+
+const { BASE_CLIENT_URL_SOCKET } = process.env;
 
 let socket: any;
 
 function init() {
-  socket = socketClient(BASE_CLIENT_URL_SOCKET, { path: '/api/socket.io' });
-  socket.on('connection', () => {
-    console.log('Connected to socketIO backend');
-  });
-  socket.on('test', (data: any) => {
-    console.log('Message received', data);
-  })
+  socket = socketClient(BASE_CLIENT_URL_SOCKET as string, { path: '/api/socket.io' });
+  socket.on('connection', () => {});
+  socket.on('test', () => {});
 
   return socket;
 }
 
-
-export default {
-  init, socket
+const exportValue = {
+  init, socket,
 };
+
+export default exportValue;

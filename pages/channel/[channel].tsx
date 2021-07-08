@@ -4,50 +4,58 @@ import { useSelector } from '../../lib/hooks/useTypedSelector';
 import SideBar from '../../components/SideBar/SideBar';
 import ChannelNavBar from '../../components/ChannelNavBar/ChannelNavBar';
 import IssuesList from '../../components/IssueList/IssueList';
-import { BASE_URL, getChannelIssuesApi } from '../../services';
+import { getChannelIssuesApi } from '../../services';
 import { store } from '../../lib/redux/store';
-import { Issue } from '../../types';
+import { Issue } from '../../lib/types';
 import styles from '../../styles/ChannelIssues.module.css';
+
+const { BASE_URL } = process.env;
 
 const initialChannelIssues: Issue[] = [];
 
 const ChannelIssues = () => {
   const router = useRouter();
-  const {channel} = router.query as {channel: string};
+  const { channel } = router.query as { channel: string };
   const myIssues = useSelector((state) => state.issues);
   const [channelIssues, setChannelIssues] = useState(initialChannelIssues);
 
   const fetchIssues = async (channelId: string) => {
-    const newChannelIssues = await getChannelIssuesApi(channelId, BASE_URL).then(res => res.json());
+    const newChannelIssues = await getChannelIssuesApi(channelId, BASE_URL)
+      .then((res) => res.json());
     setChannelIssues(newChannelIssues);
-  }
+  };
 
   useEffect(() => {
-    const channelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
+    const channelId = store.getState().channels
+      .find((inner) => inner.name === router.query.channel)?.id;
     if (channelId) fetchIssues(channelId);
   }, [myIssues, router.query.channel]);
 
   useEffect(() => {
     store.subscribe(() => {
-      const channelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
-    if (channelId) fetchIssues(channelId);
-    })
-  }, [])
+      const channelId = store.getState().channels
+        .find((inner) => inner.name === router.query.channel)?.id;
+      if (channelId) fetchIssues(channelId);
+    });
+  }, [router.query.channel]);
 
   return (
-    <div style={{display:"flex", flexDirection:"row", 
-          fontFamily:"'Libre Caslon Text', serif", backgroundColor:"#d0e4f7"}}>
+    <div style={{ display: 'flex',
+      flexDirection: 'row',
+      fontFamily: "'Libre Caslon Text', serif",
+      backgroundColor: '#d0e4f7' }}
+    >
       <SideBar />
-      <div style={{display:"flex", flexDirection:"column"}}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div>
-          {channel && <ChannelNavBar channel={channel}/>}
+          {channel && <ChannelNavBar channel={channel} />}
         </div>
         <div className={styles.issueDiv}>
-          {channelIssues && <IssuesList issues={channelIssues} channel={channel}/>}
+          {channelIssues && <IssuesList issues={channelIssues} channel={channel} />}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default ChannelIssues;

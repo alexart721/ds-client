@@ -3,9 +3,11 @@ import { useRouter } from 'next/router';
 import SideBar from '../../../components/SideBar/SideBar';
 import ChannelNavBar from '../../../components/ChannelNavBar/ChannelNavBar';
 import IssueMessage from '../../../components/IssueMessage/IssueMessage';
-import { BASE_URL, getIssueByIdApi } from '../../../services';
-import { Issue } from '../../../types';
+import { getIssueByIdApi } from '../../../services';
+import { Issue } from '../../../lib/types';
 import styles from '../../../styles/ChannelIssue.module.css';
+
+const { BASE_URL } = process.env;
 
 const initialState: Issue = {
   title: '',
@@ -26,30 +28,27 @@ const initialState: Issue = {
 };
 
 const ChannelIssue = () => {
-
   const router = useRouter();
-  const {channel} = router.query as {channel: string};
+  const { channel } = router.query as { channel: string };
   const [singleIssue, setSingleIssue] = useState(initialState);
-  
+  const getIssuebyId = async (issue: string) => {
+    const issueData: Issue = await getIssueByIdApi(issue, BASE_URL).then((res) => res.json());
+    setSingleIssue(issueData);
+  };
+
   useEffect(() => {
-    const {issue} = router.query as {issue: string};
+    const { issue } = router.query as { issue: string };
     if (issue) {
       getIssuebyId(issue);
     }
-  },[router.query.issue]);
-
-
-  const getIssuebyId = async (issue: string) => {
-    const issueData: Issue = await getIssueByIdApi(issue, BASE_URL).then(res => res.json());
-    setSingleIssue(issueData);
-  }
+  }, [router.query, router.query.issue]);
 
   return (
     <div className={styles.outerDiv}>
       <SideBar />
       <div>
-        <ChannelNavBar channel={channel} issue={singleIssue.title}/>
-        <IssueMessage issue={singleIssue}/>
+        <ChannelNavBar channel={channel} issue={singleIssue.title} />
+        <IssueMessage issue={singleIssue} />
       </div>
     </div>
   );

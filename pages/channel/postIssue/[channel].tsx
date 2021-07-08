@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-template-curly-in-string */
+import React from 'react';
 import { useRouter } from 'next/router';
-import { Form, Input, InputNumber, Select, Button, Upload, message } from 'antd';
+import { Form, Input, InputNumber, Select, Button, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import SideBar from '../../../components/SideBar/SideBar';
 import PostIssueNavBar from '../../../components/PostIssueNavBar/PostIssueNavBar';
-import { UploadOutlined } from '@ant-design/icons';
-import { IssueWithChannelId } from '../../../types';
+import { IssueWithChannelId } from '../../../lib/types';
 import { store } from '../../../lib/redux/store';
-import  { addIssueToChannel } from '../../../lib/redux/reducers';
+import { addIssueToChannel } from '../../../lib/redux/reducers';
 import styles from '../../../styles/PostIssue.module.css';
 
 const layout = {
@@ -31,33 +32,35 @@ const PostIssue: React.FC = () => {
   const router = useRouter();
 
   const onSubmit = async (values: any) => {
-    const channelId = store.getState().channels.find(channel => channel.name === router.query.channel)?.id;
+    const channelId = store.getState().channels
+      .find((channel) => channel.name === router.query.channel)?.id;
     const issueData: IssueWithChannelId = {
-      ...values, channelId
+      ...values, channelId,
     };
     store.dispatch(addIssueToChannel(issueData));
     router.push(`/channel/${router.query.channel}`);
-  }
+  };
 
   return (
     <div className={styles.outerDiv}>
       <SideBar />
       <div className={styles.navBarDiv}>
         <PostIssueNavBar />
-        <div className={styles.formDiv} >
+        <div className={styles.formDiv}>
           <Form
             {...layout}
             name="nest-messages"
             validateMessages={validateMessages}
-            onFinish={onSubmit}>
-            <Form.Item name='title' label="Title" rules={[{ required: true }]}>
+            onFinish={onSubmit}
+          >
+            <Form.Item name="title" label="Title" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name='patientAge' label="Patient Age" rules={[{ required: true, type: 'number', min: 0, max: 99 }]}>
+            <Form.Item name="patientAge" label="Patient Age" rules={[{ required: true, type: 'number', min: 0, max: 99 }]}>
               <InputNumber />
             </Form.Item>
             <Form.Item
-              name='patientGender'
+              name="patientGender"
               label="Patient Gender"
               rules={[{ required: true, message: 'Please select gender!' }]}
             >
@@ -68,7 +71,7 @@ const PostIssue: React.FC = () => {
               </Select>
             </Form.Item>
             <Form.Item
-              name='priority'
+              name="priority"
               label="Priority"
               rules={[{ required: true, message: 'Please select priority!' }]}
             >
@@ -78,10 +81,10 @@ const PostIssue: React.FC = () => {
                 <Option value="High">High</Option>
               </Select>
             </Form.Item>
-            <Form.Item name='patientMedicalIssues' label="Medical Issues" rules={[{ required: true }]}>
+            <Form.Item name="patientMedicalIssues" label="Medical Issues" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name='patientMedications' label="Medications" rules={[{ required: true }]}>
+            <Form.Item name="patientMedications" label="Medications" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
             <Form.Item name={['patientVitals', 'temperature']} label="Temperature">
@@ -93,10 +96,10 @@ const PostIssue: React.FC = () => {
             <Form.Item name={['patientVitals', 'bloodPressure']} label="Blood Pressure">
               <Input />
             </Form.Item>
-            <Form.Item name='issueDescription' label="Issue Description">
-              <Input.TextArea autoSize={{ minRows: 3, maxRows: 3 }}/>
+            <Form.Item name="issueDescription" label="Issue Description">
+              <Input.TextArea autoSize={{ minRows: 3, maxRows: 3 }} />
             </Form.Item>
-            <Form.Item name='imageFile' label="Upload Image">
+            <Form.Item name="imageFile" label="Upload Image">
               <Upload>
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
               </Upload>
@@ -111,6 +114,6 @@ const PostIssue: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default PostIssue;

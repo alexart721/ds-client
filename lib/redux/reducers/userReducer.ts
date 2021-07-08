@@ -1,6 +1,5 @@
-import { UserState } from './stateTypes';
 import { createSlice } from '@reduxjs/toolkit';
-import _ from 'lodash';
+import { UserState } from '../../types';
 
 const initialState: UserState = {
   id: '',
@@ -17,9 +16,11 @@ export const userSlice = createSlice({
   reducers: {
     addUser(state, action) {
       const addUser = action.payload;
-      return state = {
-        ...addUser
-      }
-    }
-  }
+      const newState = {
+        ...state,
+        ...addUser,
+      };
+      return newState;
+    },
+  },
 });
