@@ -9,8 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "@reduxjs/toolkit": "^1.6.0",
     "@types/socket.io-client": "^3.0.0",
+    "@typescript-eslint/experimental-utils": "^4.28.2",
+    "antd": "^4.16.6",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-import-resolver-typescript": "^2.4.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "next": "11.0.1",
@@ -18,16 +23,15 @@
     "react-dom": "17.0.2",
     "react-redux": "^7.2.4",
     "socket.io-client": "^4.1.2",
+    "uninstall": "^0.0.0",
     "use-subscription": "^1.5.1"
   },
   "devDependencies": {
-    "@ant-design/icons": "^4.6.2",
     "@types/lodash": "^4.14.170",
     "@types/node": "^15.12.5",
     "@types/react": "17.0.11",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
-    "antd": "^4.16.6",
     "eslint": "^7.29.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-next": "11.0.1",

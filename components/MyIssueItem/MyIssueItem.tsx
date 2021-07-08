@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { MyIssueState } from '../../lib/redux/reducers';
+import { MyIssueState } from '../../lib/types';
 
 interface Props {
   issue: MyIssueState,

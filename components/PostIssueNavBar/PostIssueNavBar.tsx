@@ -6,20 +6,21 @@ import styles from './PostIssueNavBar.module.css';
 
 const { Header } = Layout;
 
-
 const PostIssueNavBar = () => {
-  
   const router = useRouter();
-  const {channel} = router.query;
-  
+  const { channel } = router.query;
+
   return (
     <div className={styles.postIssueNavBarDiv}>
       <Header className={styles.sitePageHeader}>
         <div>
-          #{channel} - New Issue
+          #
+          {channel}
+          {' '}
+          - New Issue
         </div>
         <div className={styles.innerDiv}>
-          <Link href="/channel/[channel]" as={`/channel/${channel}`}><Button type="primary">&emsp;&emsp; Back To Channel &emsp;&emsp;</Button></Link>
+          <Link href="/channel/[channel]" as={`/channel/${channel}`} passHref><Button type="primary">&emsp;&emsp; Back To Channel &emsp;&emsp;</Button></Link>
         </div>
       </Header>
     </div>
