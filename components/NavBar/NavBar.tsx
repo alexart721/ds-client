@@ -8,13 +8,13 @@ interface Props {
   userName: string
 }
 
-const NavBar: React.FC<Props> = ({userName}) => {
-
-  return (
-    <div className={styles.navBarDiv}>
-      <Header className={styles.sitePageHeader}>Welcome {userName}</Header>
-    </div>
-  );
-};
+const NavBar: React.FC<Props> = ({ userName }) => (
+  <div className={styles.navBarDiv}>
+    <Header className={styles.sitePageHeader}>
+      Welcome
+      {userName}
+    </Header>
+  </div>
+);
 
 export default NavBar;
