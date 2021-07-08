@@ -6,12 +6,11 @@ import styles from './PostIssueNavBar.module.css';
 
 const { Header } = Layout;
 
-
 const PostIssueNavBar = () => {
-  
+
   const router = useRouter();
   const {channel} = router.query;
-  
+
   return (
     <div className={styles.postIssueNavBarDiv}>
       <Header className={styles.sitePageHeader}>

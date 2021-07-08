@@ -1,14 +1,10 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Input, message } from 'antd';
+import { Input } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import styles from './IssueMessage.module.css';
 import { Issue, MessageData } from '../../types';
-// import io from 'socket.io-client';
-import sockets from '../../sockets';
 import MessageList from '../MessageList/MessageList';
-import { store } from '../../lib/redux/store';
-import { UserState } from '../../lib/redux/reducers';
 import { useSelector } from '../../lib/hooks/useTypedSelector';
 import { BASE_URL } from '../../services';
 
@@ -19,37 +15,23 @@ interface Props {
 const {Search} = Input;
 
 const SendIcon = (<SendOutlined
-                  style={{
-                    fontSize: 30,
-                    color: '#001529',
-                  }}
-                  />)
+  style={{
+    fontSize: 30,
+    color: '#001529',
+  }}
+  />);
 
 const IssueMessage: FC<Props>  = ({ issue }) => {
-
   const [messages, setMessages] = useState<MessageData[]>(issue.threadMessages || []);
   const userInfo = useSelector((store) => store.user);
   const socket = useSelector((store) => store.socket.socket);
 
   useEffect(() => {
-    // Get messages from issue
-    // console.log(issue.threadMessages);
-    // if (issue.threadMessages && issue.threadMessages.length > messages.length) {
-    //   setMessages(issue.threadMessages);
-    // }
-    // console.log('store', store.getState());
-    // if (!userInfo) {
-    //   userInfo = store.getState().user;
-    // }
-//
     if (socket && issue._id) {
-      console.log('Loading socket...');
       socket.emit('leave_all_rooms', `${issue._id}`);
-console.log('Issue id when joining room:', issue._id);
       socket.emit('join_room', `${issue._id}`);
       socket.off('broadcast_message');
       socket.on('broadcast_message', (message: MessageData) => {
-        console.log('Message received', message);
         setMessages(oldMessages => {
           if (!oldMessages.includes(message)) {
             return oldMessages.concat(message);
@@ -70,19 +52,12 @@ console.log('Issue id when joining room:', issue._id);
     }
   }, [issue.threadMessages]);
 
-  // *****
-  // * Socket.io stuff
-  // *****
-
-
-
   const onSubmit = async (values: string) => {
     const newMessage: MessageData = {
       messageOwnerId: userInfo.id,
       messageOwnerName: `Dr. ${userInfo.firstName} ${userInfo.lastName}`,
       content: values,
     }
-    console.log(newMessage);
     socket.emit('room_message', { room: `${issue._id}`, message: newMessage });
   }
 
