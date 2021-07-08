@@ -3,7 +3,6 @@ import React, { FC, useState, useEffect } from 'react';
 import { Input } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import moment from 'moment';
-import Image from 'next/image';
 import styles from './IssueMessage.module.css';
 import { Issue, MessageData } from '../../lib/types';
 import MessageList from '../MessageList/MessageList';
@@ -145,7 +144,7 @@ const IssueMessage: FC<Props> = ({ issue }) => {
             <>
               <p className={styles.details1}>Picture:</p>
             &emsp;&emsp;&emsp;
-              <img style={{height: '200px', width: '200px'}} src={`${NEXT_PUBLIC_BASE_URL}${issue.imageUrl}`} alt="Not found" />
+              <img style={{ height: '200px', width: '200px' }} src={`${NEXT_PUBLIC_BASE_URL}${issue.imageUrl}`} alt="Not found" />
               <br />
               <br />
             </>

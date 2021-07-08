@@ -2,7 +2,6 @@ import { FC, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'antd';
 import moment from 'moment';
-import Image from 'next/image';
 import styles from './IssueItem.module.css';
 import { Issue } from '../../lib/types';
 
@@ -135,7 +134,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
               <>
                 <p className={styles.details1}>Picture:</p>
             &emsp;&emsp;&emsp;
-                <img style={{height: '200px', width: '200px'}} src={`${NEXT_PUBLIC_BASE_URL}${issue.imageUrl}`} alt="Not found" />
+                <img style={{ height: '200px', width: '200px' }} src={`${NEXT_PUBLIC_BASE_URL}${issue.imageUrl}`} alt="Not found" />
                 <br />
                 <br />
               </>

@@ -19,7 +19,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   // sockets.init();
   const refreshGuard = async (accessToken: string) => {
     const response = await checkToken(accessToken, 'User', NEXT_PUBLIC_BASE_AUTH_URL).then((res) => res.json());
-    const user = await getUserApi(accessToken, response.id, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
+    const user = await getUserApi(accessToken,
+      response.id, NEXT_PUBLIC_BASE_URL).then((res) => res.json());
     const setUserState: UserState = {
       id: user._id || '',
       firstName: user.firstName,
