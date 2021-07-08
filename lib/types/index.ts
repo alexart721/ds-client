@@ -1,4 +1,26 @@
-import { MyChannelState, MyIssueState } from '../lib/redux/reducers';
+import { Socket } from 'socket.io-client';
+
+export interface MyChannelState {
+  id: string;
+  name: string;
+}
+
+export interface MyIssueState {
+  id: string;
+  title: string;
+  channelName: string;
+}
+
+export interface UserState {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  license: string;
+  state: string;
+}
+
+export type SocketState = Socket;
 
 export interface User {
   _id?: string;
@@ -46,7 +68,7 @@ export interface Issue {
   tags?: string[];
   threadMessages?: MessageData[];
   createdAt?: Date;
-  imageFile?: {file: {originFileObj: File}};
+  imageFile?: { file: { originFileObj: File } };
 }
 
 export interface IssueWithChannelId extends Issue {
