@@ -73,7 +73,7 @@ const IssueMessage: FC<Props> = ({ issue }) => {
           <h2 style={{ width: 'fit-content', marginBottom: '0.5rem', color: '#C89933' }}>
             { issue.title }
             {' '}
-            - Prority
+            - Priority
             {' '}
             {issue.priority}
           </h2>
@@ -82,7 +82,7 @@ const IssueMessage: FC<Props> = ({ issue }) => {
           <h2 style={{ width: 'fit-content', marginBottom: '0.5rem', color: 'orange' }}>
             { issue.title }
             {' '}
-            - Prority
+            - Priority
             {' '}
             {issue.priority}
           </h2>
@@ -91,7 +91,7 @@ const IssueMessage: FC<Props> = ({ issue }) => {
           <h2 style={{ width: 'fit-content', marginBottom: '0.5rem', color: 'red' }}>
             { issue.title }
             {' '}
-            - Prority
+            - Priority
             {' '}
             {issue.priority}
           </h2>

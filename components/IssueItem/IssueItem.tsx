@@ -31,7 +31,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
             <h2 style={{ width: 'fit-content', marginBottom: '0.5rem', color: '#C89933' }}>
               { issue.title }
               {' '}
-              - Prority
+              - Priority
               {' '}
               {issue.priority}
             </h2>
@@ -40,7 +40,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
             <h2 style={{ width: 'fit-content', marginBottom: '0.5rem', color: 'orange' }}>
               { issue.title }
               {' '}
-              - Prority
+              - Priority
               {' '}
               {issue.priority}
             </h2>
@@ -49,7 +49,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
             <h2 style={{ width: 'fit-content', marginBottom: '0.5rem', color: 'red' }}>
               { issue.title }
               {' '}
-              - Prority
+              - Priority
               {' '}
               {issue.priority}
             </h2>
@@ -73,7 +73,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
             <h2 style={{ width: 'fit-content', marginBottom: '0.5rem', color: '#C89933' }}>
               { issue.title }
               {' '}
-              - Prority
+              - Priority
               {' '}
               {issue.priority}
             </h2>
@@ -82,7 +82,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
             <h2 style={{ width: 'fit-content', marginBottom: '0.5rem', color: 'orange' }}>
               { issue.title }
               {' '}
-              - Prority
+              - Priority
               {' '}
               {issue.priority}
             </h2>
@@ -91,7 +91,7 @@ const IssueItem: FC<Props> = ({ issue, channel }) => {
             <h2 style={{ width: 'fit-content', marginBottom: '0.5rem', color: 'red' }}>
               { issue.title }
               {' '}
-              - Prority
+              - Priority
               {' '}
               {issue.priority}
             </h2>
